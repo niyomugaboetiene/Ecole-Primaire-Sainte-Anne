@@ -1,0 +1,115 @@
+import Stock_Out from "../schema/Stock_Out.js";
+import Stock_In from "../schema/Stock_InSchema.js";
+import express from "express"
+
+const router = express.Router();
+
+router.post('/AddNew', async (req, res) => {
+    try {
+    const  { Product_Id, Date, Quantity }  = req.body;
+
+    if (!Product_Id || !Date || !Quantity) {
+        return res.status(400).json({ message: 'Please fill out missing details' });
+    }
+
+    const stocks = await Stock_In.find({ Product_Id });
+
+    const numberOfStockIN = stocks.Quantity;
+    if (Quantity > numberOfStockIN) {
+        return res.status(403).json({ message: `This Quantity is not in stock. in stock we have ${numberOfStockIN} `})
+    }
+    const StockOut = await Stock_Out.create({ Product_Id, Date, Quantity, });
+
+    return res.status(201).json({ message: 'New Stock Out added successfully', stockOut: StockOut });
+} catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: 'Internal server error' });
+}
+});
+
+router.get('/list', async (req, res) => {
+    try {
+        const List = await Stock_In.find();
+
+        if (List.length === 0) {
+            return res.status(404).json({ message: 'No Stock in the system' });
+        } 
+
+        return res.status(200).json({ message: 'Stock list', list: List });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+router.get('/single/:_id', async (req, res) => {
+    try {
+        const { _id } = req.params;
+
+        if (!_id) {
+            return res.status(404).json({ message: 'Stock Id is required' });
+        }
+        const List = await Stock_In.findById(_id);
+
+        if (List.length === 0) {
+            return res.status(404).json({ message: 'No stock in in the system' });
+        } 
+
+        return res.status(200).json({ message: 'Stock list', list: List });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+
+router.put('/update/:_id', async (req, res) => {
+  try {
+       
+       const _id = req.params._id;
+       const  {Product_Id, Date, Quantity, Unit_price }  = req.body;
+  
+       let receivedFields = {};
+
+       if (Product_Id) receivedFields.Product_Id = Product_Id;
+       if (Date) receivedFields.Date = Date;
+       if (Quantity) receivedFields.Quantity = Quantity;
+       if (Unit_price) receivedFields.Unit_price = Unit_price;
+
+       let Total_price;
+       if (Quantity || Unit_price) {
+            Total_price = Quantity * Unit_price;
+       }
+
+       if (Total_price) receivedFields.Total_price = Total_price;
+
+        const StockIN = await Stock_In.findByIdAndUpdate(_id, receivedFields, { new: true });
+
+        return res.status(201).json({ message: 'Stock In Updated successfully', stockIn: StockIN });
+     } catch (err) {
+         console.error(err);
+         return res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+router.delete('/delete/:_id', async (req, res) => {
+    try {
+        const _id = req.params._id;
+
+        if (!_id) return res.status(400).json({ message: 'Fill out missing fields' });
+
+        const isExist = await Stock_In.findById(_id);
+
+
+        if (!isExist) return res.status(403).json({ message: 'Enter valid Id' });
+
+        await Stock_In.findByIdAndDelete(_id);
+
+        return res.status(200).json({ message: 'Deleted successfully' });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+export default router;
