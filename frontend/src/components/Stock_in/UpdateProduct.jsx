@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { FaEdit, FaPlus } from "react-icons/fa";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const UpdateStockIn = () => {
     // Product_Id, Date, Quantity, Unit_price
@@ -13,9 +13,8 @@ const UpdateStockIn = () => {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
 
-    const [stockIn, setStockIn] = useState(null);
 
-    const { _id } = useNavigate();
+    const { _id } = useParams();
 
     const navigate = useNavigate();
     
@@ -25,8 +24,12 @@ const UpdateStockIn = () => {
        try {
            const res = await axios.get('http://localhost:5000/stockIn/list')
 
-           setStockIn(res.data.list);
-           console.log("P name", res.data.list);
+           const stocksIn =  res.data.list;
+           setDate(new Date(stocksIn.Date).isoString().split('')[0]);
+           setProduct_Id(stocksIn.Product_Id);
+           setQuantity(stocksIn.Quantity);
+           setUnit_price(stocksIn.Unit_price);
+        //    console.log("P name", res.data.list);
        } catch (err) {
         console.error(err);
        }
@@ -88,6 +91,7 @@ const UpdateStockIn = () => {
                     <select 
                        className="w-full bg-sky-100 py-2 p-1 rounded-full mt-1 focus:outline-1 focus:outline-sky-300"
                        onChange={(e) => setProduct_Id(e.target.value)}
+                       value={Product_Id}
                     >
                       {products?.map((prod, index) => (
                         <option key={index} value={prod._id}>{prod.Product_Name}</option>
@@ -97,6 +101,7 @@ const UpdateStockIn = () => {
                 <div className="mt-2">
                  <label htmlFor="" className="text-gray-800 text-lg block">Date</label>
                  <input type="date" 
+                    value={Date}
                      placeholder="Enter Product Name" 
                      className="w-full px-3 bg-sky-100 py-2 p-1 rounded-full mt-1 focus:outline-1 focus:outline-sky-300"
                      onChange={(e) => setDate(e.target.value)} />
@@ -105,7 +110,8 @@ const UpdateStockIn = () => {
                 <div className="mt-2">
                  <label htmlFor="" className="text-gray-800 text-lg block">Qauntity</label>
                  <input type="number" 
-                     placeholder="Enter Product Quantity" 
+                     value={Quantity}
+                     placeholder="Product Quantity (Unit also will be required)" 
                      className="w-full px-3 bg-sky-100 py-2 p-1 rounded-full mt-1 focus:outline-1 focus:outline-sky-300"
                      onChange={(e) => setQuantity(e.target.value)} />
                 </div>
@@ -113,6 +119,7 @@ const UpdateStockIn = () => {
                 <div className="mt-2">
                  <label htmlFor="" className="text-gray-800 text-lg block">Date</label>
                  <input type="number" 
+                     value={Unit_price}
                      placeholder="Enter Unit price" 
                      className="w-full px-3 bg-sky-100 py-2 p-1 rounded-full mt-1 focus:outline-1 focus:outline-sky-300"
                      onChange={(e) => setUnit_price(e.target.value)} />
