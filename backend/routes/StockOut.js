@@ -122,12 +122,12 @@ router.delete('/delete/:_id', async (req, res) => {
 
         if (!_id) return res.status(400).json({ message: 'Fill out missing fields' });
 
-        const isExist = await Stock_In.findById(_id);
+        const isExist = await Stock_Out.findById(_id);
 
 
         if (!isExist) return res.status(403).json({ message: 'Enter valid Id' });
 
-        await Stock_In.findByIdAndDelete(_id);
+        await Stock_Out.findByIdAndDelete(_id);
 
         return res.status(200).json({ message: 'Deleted successfully' });
     } catch (err) {
