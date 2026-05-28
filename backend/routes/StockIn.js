@@ -72,9 +72,12 @@ router.put('/update/:_id', async (req, res) => {
        if (Quantity || Unit_price) {
             Total_price = Quantity * Unit_price;
        }
-        const StockIN = await Stock_In.create({ Product_Id, Date, Quantity, Unit_price, Total_price  });
 
-        return res.status(201).json({ message: 'New Stock In added successfully', stockIn: StockIN });
+       if (Total_price) receivedFields.Total_price = Total_price;
+
+        const StockIN = await Stock_In.findByIdAndUpdate(_id, receivedFields, { new: true });
+
+        return res.status(201).json({ message: 'Stock In Updated successfully', stockIn: StockIN });
      } catch (err) {
          console.error(err);
          return res.status(500).json({ message: 'Internal server error' });
