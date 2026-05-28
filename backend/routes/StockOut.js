@@ -177,9 +177,24 @@ router.get('/product/:Product_Id', async (req, res) => {
             return total + item.Quantity;
         }, 0);
         
-        const totalStockOut = stockOut.reduce((total, item) => {
+        const totalStockIN = stockIn.reduce((total, item) => {
             return total + item.Quantity;
         }, 0);
+
+        const remainingStock = totalStockIN - totalStockOut;
+
+        return res.status(200).json({ message: 'Report generated successfully', 
+            summary: {
+                stockIn,
+                stockOut,
+                totalStockIN, 
+                totalStockOut,
+                remainingStock
+            }
+        });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'Intenal server error' });
     }
 })
 export default router;
