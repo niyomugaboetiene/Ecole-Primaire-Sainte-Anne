@@ -26,7 +26,8 @@ const ProductList = () => {
                     <thead>
                         <tr>
                             <th>Product Id</th>
-                            <th>Product Product Name</th>
+                            <th>Product Name</th>
+                            <th>Done at</th>
                         </tr>
                     </thead>
 
@@ -35,6 +36,7 @@ const ProductList = () => {
                             <tr key={index}>
                                 <td>{prod.Product_Id}</td>
                                 <td>{prod.Product_Name}</td>
+                                <td>{new Date(prod?.createdAt).toLocaleDateString() || "No Date"}</td>
                             </tr>
                         ))}
                     </tbody>
