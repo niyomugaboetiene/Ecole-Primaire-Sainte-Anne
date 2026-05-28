@@ -5,13 +5,13 @@ const router = express.Router();
 
 router.post('/AddNew', async (req, res) => {
     try {
-    const  Product_Name  = req.body;
+    const  {Product_Name, Product_Id}  = req.body;
 
     if (!Product_Name) {
         return res.status(400).json({ message: 'Please fill out name of product' });
     }
 
-    const newProduct = await Product.create(Product_Name);
+    const newProduct = await Product.create({ Product_Id, Product_Name});
 
     return res.status(201).json({ message: 'New product added successfully', product: newProduct });
 } catch (err) {
@@ -35,14 +35,14 @@ router.get('/list', async (req, res) => {
     }
 });
 
-router.get('/single/:Product_Id', async (req, res) => {
+router.get('/single/:_id', async (req, res) => {
     try {
-        const { Product_Id } = req.body;
+        const { _id } = req.params;
 
-        if (!Product_Id) {
+        if (!_id) {
             return res.status(404).json({ message: 'Product Id is required' });
         }
-        const List = await Product.findById(Product_Id);
+        const List = await Product.findById(_id);
 
         if (List.length === 0) {
             return res.status(404).json({ message: 'No product in the system' });
