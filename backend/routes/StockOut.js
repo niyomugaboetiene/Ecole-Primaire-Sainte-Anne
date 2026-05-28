@@ -40,7 +40,7 @@ router.post('/AddNew', async (req, res) => {
 
 router.get('/list', async (req, res) => {
     try {
-        const List = await Stock_In.find().populate("Product_Id");
+        const List = await Stock_Out.find().populate("Product_Id");
 
         if (List.length === 0) {
             return res.status(404).json({ message: 'No Stock in the system' });
@@ -122,11 +122,7 @@ router.delete('/delete/:_id', async (req, res) => {
 
         if (!_id) return res.status(400).json({ message: 'Fill out missing fields' });
 
-        const isExist = await Stock_Out.findById(_id);
-
-
-        if (!isExist) return res.status(403).json({ message: 'Enter valid Id' });
-
+        console.log(_id);
         await Stock_Out.findByIdAndDelete(_id);
 
         return res.status(200).json({ message: 'Deleted successfully' });
