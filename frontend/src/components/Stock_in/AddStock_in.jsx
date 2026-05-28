@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaPlus } from "react-icons/fa";
 import axios from "axios";
 
@@ -37,13 +37,13 @@ const AddStockIn = () => {
         } catch (err) {
             console.error(err);
             const errorMessage = err.response?.data?.message || "Error occured";
-            setMessage(errorMessage);
+            setError(errorMessage);
         }
     }
 
     return (
-        <div className="bg-sky-200 min-h-screen flex justify-center items-center">
-            <div className="bg-white p-2 h-fit w-90 rounded-lg shadow-lg">
+        <div className="bg-sky-200 min-h-screen flex justify-center items-center ">
+            <div className="bg-white p-3 h-fit w-100 rounded-lg shadow-lg">
                 <div>
                     {message && (
                         <div className="bg-green-200 py-2 rounded-lg p-2 font-bold text-green-600 mb-3">
@@ -81,7 +81,7 @@ const AddStockIn = () => {
                  <label htmlFor="" className="text-gray-800 text-lg block">Qauntity</label>
                  <input type="number" 
                      placeholder="Enter Product Quantity" 
-                     className="w-full bg-sky-100 py-2 p-1 rounded-full mt-1 focus:outline-1 focus:outline-sky-300"
+                     className="w-full px-3 bg-sky-100 py-2 p-1 rounded-full mt-1 focus:outline-1 focus:outline-sky-300"
                      onChange={(e) => setQuantity(e.target.value)} />
                 </div>
                 
@@ -89,7 +89,7 @@ const AddStockIn = () => {
                  <label htmlFor="" className="text-gray-800 text-lg block">Date</label>
                  <input type="number" 
                      placeholder="Enter Unit price" 
-                     className="w-full bg-sky-100 py-2 p-1 rounded-full mt-1 focus:outline-1 focus:outline-sky-300"
+                     className="w-full px-3 bg-sky-100 py-2 p-1 rounded-full mt-1 focus:outline-1 focus:outline-sky-300"
                      onChange={(e) => setUnit_price(e.target.value)} />
                 </div>
 
@@ -98,3 +98,5 @@ const AddStockIn = () => {
         </div>
     )
 }
+
+export default AddStockIn;
