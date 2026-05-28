@@ -92,7 +92,7 @@ const AddStockIn = () => {
                 </div>
                 
                 <div className="mt-2">
-                 <label htmlFor="" className="text-gray-800 text-lg block">Date</label>
+                 <label htmlFor="" className="text-gray-800 text-lg block">Unit Price</label>
                  <input type="number" 
                      placeholder="Enter Unit price" 
                      className="w-full px-3 bg-sky-100 py-2 p-1 rounded-full mt-1 focus:outline-1 focus:outline-sky-300"

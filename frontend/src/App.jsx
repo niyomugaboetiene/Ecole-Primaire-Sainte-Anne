@@ -5,6 +5,7 @@ import UpdateProduct from "./components/Products/UpdateProduct";
 
 import AddStockIn from "./components/Stock_in/AddStock_in";
 import StockInList from "./components/Stock_in/StockINList";
+import UpdateStockIn from "./components/Stock_in/UpdateProduct";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
@@ -19,6 +20,7 @@ function App() {
           {/* stockIn */}
           <Route path="/stockIn/AddNew" element={<AddStockIn />}/>
           <Route path="/stockIn/list" element={<StockInList />}/>
+          <Route path="/stockIn/update/:_id" element={<UpdateStockIn /> }/>
         </Routes>
      </BrowserRouter>
   )

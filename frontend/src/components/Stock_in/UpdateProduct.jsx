@@ -22,11 +22,11 @@ const UpdateStockIn = () => {
 
     const handleGetStock = async () => {
        try {
-           const res = await axios.get('http://localhost:5000/stockIn/list')
+           const res = await axios.get(`http://localhost:5000/stockIn/single/${_id}`)
 
            const stocksIn =  res.data.list;
-           setDate(new Date(stocksIn.Date).isoString().split('')[0]);
-           setProduct_Id(stocksIn.Product_Id);
+           console.log("Stock in", stocksIn);
+           setProduct_Id(stocksIn.Product_Id?._id);
            setQuantity(stocksIn.Quantity);
            setUnit_price(stocksIn.Unit_price);
         //    console.log("P name", res.data.list);
@@ -101,7 +101,6 @@ const UpdateStockIn = () => {
                 <div className="mt-2">
                  <label htmlFor="" className="text-gray-800 text-lg block">Date</label>
                  <input type="date" 
-                    value={Date}
                      placeholder="Enter Product Name" 
                      className="w-full px-3 bg-sky-100 py-2 p-1 rounded-full mt-1 focus:outline-1 focus:outline-sky-300"
                      onChange={(e) => setDate(e.target.value)} />
@@ -117,7 +116,7 @@ const UpdateStockIn = () => {
                 </div>
                 
                 <div className="mt-2">
-                 <label htmlFor="" className="text-gray-800 text-lg block">Date</label>
+                 <label htmlFor="" className="text-gray-800 text-lg block">Unit Price</label>
                  <input type="number" 
                      value={Unit_price}
                      placeholder="Enter Unit price" 
