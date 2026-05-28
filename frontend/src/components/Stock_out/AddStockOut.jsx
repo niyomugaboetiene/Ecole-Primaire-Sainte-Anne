@@ -39,10 +39,12 @@ const AddStockOut = () => {
             setTimeout(() => {
                 navigate('/stockOut/list');
             }, 2000);
+            setError("");
         } catch (err) {
             console.error(err);
             const errorMessage = err.response?.data?.message || "Error occured";
             setError(errorMessage);
+            setMessage("");
         }
     }
 
