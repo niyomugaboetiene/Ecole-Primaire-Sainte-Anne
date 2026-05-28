@@ -36,7 +36,7 @@ const AddProduct = () => {
                             {message}
                         </div>
                     )}
-                    {error & (
+                    {error && (
                         <div>
                             {error}
                         </div>
