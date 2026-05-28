@@ -29,6 +29,18 @@ const AddProduct = () => {
         <div>
             <div>
                 <div>
+                    {message && (
+                        <div>
+                            {message}
+                        </div>
+                    )}
+                    {error & (
+                        <div>
+                            {error}
+                        </div>
+                    )}
+                </div>
+                <div>
                     <label htmlFor="">Product Id</label>
                     <input type="text" placeholder="Enter Product Id (unique)" onChange={(e) => setProduct_Id(e.target.value)} />
                 </div>
