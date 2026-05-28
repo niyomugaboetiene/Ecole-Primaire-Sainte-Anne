@@ -55,4 +55,29 @@ router.get('/single/:_id', async (req, res) => {
     }
 });
 
+
+router.put('/update/:_id', async (req, res) => {
+    try {
+        const _id = req.params._id;
+
+        if (!_id) return res.status(400).json({ message: 'FIll out IDs' });
+        const { Product_Name } = req.body;
+
+        let newFields = {}
+        if (Product_Name) newFields.Product_Name = Product_Name;
+
+        const updatedProduct = await Product.findByIdAndUpdate(_id, newFields, { new: true });
+
+        return res.status(200).json({ message: 'Updated successfully', new: updatedProduct });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'Intenal server error' });
+    }
+});
+
+router.delete('/delete/:_id', async (req, res) => {
+    try {
+        const _id = req.params._id;
+    }
+})
 export default router;
