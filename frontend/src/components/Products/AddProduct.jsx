@@ -31,15 +31,15 @@ const AddProduct = () => {
 
     return (
         <div className="bg-sky-200 min-h-screen flex justify-center items-center">
-            <div className="bg-white p-2 h-70 w-90 rounded-lg shadow-lg">
+            <div className="bg-white p-2 h-fit w-90 rounded-lg shadow-lg">
                 <div>
                     {message && (
-                        <div>
+                        <div className="bg-green-200 py-2 rounded-lg p-2 font-bold text-green-600 mb-3">
                             {message}
                         </div>
                     )}
                     {error && (
-                        <div>
+                        <div className="bg-red-200 py-2 rounded-lg p-2 font-bold text-red-600 mb-3">
                             {error}
                         </div>
                     )}
@@ -49,7 +49,7 @@ const AddProduct = () => {
                 <div className="mt-2">
                     <label htmlFor="" className="text-gray-800 text-lg block">Product Id</label>
                     <input type="text" 
-                    className="w-full bg-sky-100 py-2 p-1 rounded-full mt-1"
+                    className="w-full bg-sky-100 py-2 p-1 rounded-full mt-1 focus:outline-1 focus:outline-sky-300"
                     placeholder="Enter Product Id (unique)"
                      onChange={(e) => setProduct_Id(e.target.value)} />
                 </div>
@@ -57,7 +57,7 @@ const AddProduct = () => {
                  <label htmlFor="" className="text-gray-800 text-lg block">Product Name</label>
                  <input type="text" 
                  placeholder="Enter Product Name" 
-                 className="w-full bg-sky-100 py-2 p-1 rounded-full mt-1"
+                 className="w-full bg-sky-100 py-2 p-1 rounded-full mt-1 focus:outline-1 focus:outline-sky-300"
                  onChange={(e) => setProduct_Name(e.target.value)} />
                 </div>
 
