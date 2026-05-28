@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post('/AddNew', async (req, res) => {
     try {
-    const  {Product_Id, Date, Quantity, Unit_price }  = req.body;
+    const  { Product_Id, Date, Quantity, Unit_price }  = req.body;
 
     if (!Product_Id || !Date || !Quantity || !Unit_price) {
         return res.status(400).json({ message: 'Please fill out missing details' });
@@ -59,6 +59,8 @@ router.get('/single/:_id', async (req, res) => {
 
 router.put('/update/:_id', async (req, res) => {
   try {
+       
+       const _id = req.params._id;
        const  {Product_Id, Date, Quantity, Unit_price }  = req.body;
   
        let receivedFields = {};
@@ -89,6 +91,11 @@ router.delete('/delete/:_id', async (req, res) => {
         const _id = req.params._id;
 
         if (!_id) return res.status(400).json({ message: 'Fill out missing fields' });
+
+        const isExist = await Stock_In.findById(_id);
+
+
+        if (!isExist) return res.status(403).json({ message: 'Enter valid Id' });
 
         await Stock_In.findByIdAndDelete(_id);
 
