@@ -89,13 +89,13 @@ router.put('/update/:_id', async (req, res) => {
        
        const totalStockInQauntity = stocksIn.reduce((total, item) => {
         return total + item.Quantity;
-       })
+       }, 0)
 
        const stocksOut = await Stock_Out.find({ Product_Id });
 
        const totalStockOutQauntity = stocksOut.reduce((total, item) => {
         return total + item.Quantity;
-       });
+       }, 0);
 
        const remainingStock = totalStockInQauntity - totalStockOutQauntity;
 
