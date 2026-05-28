@@ -136,4 +136,15 @@ router.delete('/delete/:_id', async (req, res) => {
     }
 });
 
+
+
+// Full report
+router.get('/report', async (req, res) => {
+    try {
+    
+        const stockIn = await Stock_In.find().populate("products");
+       const stockOut = await Stock_Out.find().populate("products");
+
+    }
+})
 export default router;
