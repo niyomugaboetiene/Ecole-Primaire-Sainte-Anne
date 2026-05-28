@@ -40,7 +40,7 @@ router.post('/AddNew', async (req, res) => {
 
 router.get('/list', async (req, res) => {
     try {
-        const List = await Stock_In.find().populate("products");
+        const List = await Stock_In.find().populate("Product_Id");
 
         if (List.length === 0) {
             return res.status(404).json({ message: 'No Stock in the system' });
@@ -60,7 +60,7 @@ router.get('/single/:_id', async (req, res) => {
         if (!_id) {
             return res.status(404).json({ message: 'Stock Id is required' });
         }
-        const List = await Stock_In.findById(_id).populate("products");
+        const List = await Stock_In.findById(_id).populate("Product_Id");
 
         if (List.length === 0) {
             return res.status(404).json({ message: 'No stock in in the system' });
@@ -109,7 +109,7 @@ router.put('/update/:_id', async (req, res) => {
 
        const UpdatedStockOut = await Stock_Out.findByIdAndUpdate(_id, receivedFields, { new: true });
 
-        return res.status(201).json({ message: 'Stock In Updated successfully', updated: UpdatedStockOut });
+        return res.status(200).json({ message: 'Stock In Updated successfully', updated: UpdatedStockOut });
      } catch (err) {
          console.error(err);
          return res.status(500).json({ message: 'Internal server error' });
@@ -138,13 +138,29 @@ router.delete('/delete/:_id', async (req, res) => {
 
 
 
-// Full report
+// basic Full report
 router.get('/report', async (req, res) => {
     try {
     
-        const stockIn = await Stock_In.find().populate("products");
-       const stockOut = await Stock_Out.find().populate("products");
+        const stockIn = await Stock_In.find().populate("Product_Id");
+        const stockOut = await Stock_Out.find().populate("Product_Id");
 
+        const totalStockOut = stockOut.reduce((total, item) => {
+            return total + item.Quantity;
+        }, 0);
+
+        const totalStockIn = stockIn.reduce((total, item) => {
+            return total + item.Quantity;
+        }, 0);
+
+        const remainingStock = totalStockIn - totalStockOut;
+
+
+        return res.status(200).json({ message: 'Stock generated successfully', summary: { stockIn, stockOut, totalStockIn, totalStockOut, remainingStock }});
+
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'Internal server error '})
     }
 })
 export default router;
