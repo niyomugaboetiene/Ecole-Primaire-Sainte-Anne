@@ -12,6 +12,7 @@ const StockInList = () => {
            const res = await axios.get('http://localhost:5000/stockIn/list')
 
            setStockIn(res.data.list);
+           console.log("P name", res.data.list);
        } catch (err) {
         console.error(err);
        }
