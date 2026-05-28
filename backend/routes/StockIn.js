@@ -64,9 +64,12 @@ router.put('/update/:_id', async (req, res) => {
        
        if (!_id) return res.status(403).json({ message: 'IDs is required' });
 
-       
        const  {Product_Id, Date, Quantity, Unit_price }  = req.body;
   
+       const stock = await Stock_In.findById(_id);
+
+       if (!stock) return res.status(404).json({ message: 'No stock found' });
+
        let receivedFields = {};
 
        if (Product_Id) receivedFields.Product_Id = Product_Id;
@@ -74,7 +77,11 @@ router.put('/update/:_id', async (req, res) => {
        if (Quantity) receivedFields.Quantity = Quantity;
        if (Unit_price) receivedFields.Unit_price = Unit_price;
 
-       
+       let Total_price;
+
+       if (Quantity && Unit_price) {
+           Total_price = Quantity * Unit_price;
+       }
 
        if (Total_price) receivedFields.Total_price = Total_price;
 
