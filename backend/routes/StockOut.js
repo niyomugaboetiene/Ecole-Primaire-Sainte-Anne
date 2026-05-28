@@ -166,7 +166,7 @@ router.get('/report', async (req, res) => {
 
 // get report per product
 
-router.get('/product/:Product_Id', async (req, res) => {
+router.get('/report/product/:Product_Id', async (req, res) => {
     try {
         const { Product_Id } = req.params;
 
