@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { FaEdit } from "react-icons/fa";
 import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 
 const UpdateProduct = () => {
     const [Product_Id, setProduct_Id] = useState(0);
@@ -14,9 +15,20 @@ const UpdateProduct = () => {
 
     const handleGetExistingProduct = async () => {
         try {
-            const res = await axios.get(`http://localhost:5000/products/single/${_id}`)
+            const res = await axios.get(`http://localhost:5000/products/single/${_id}`);
+            const product = res.data.list;
+
+            setProduct_Id(product.Product_Id);
+            setProduct_Name(product.Product_Name);
+        } catch (err) {
+            console.error(err);
         }
     }
+
+    useEffect(() => {
+        handleGetExistingProduct();
+    }, [_id]);
+    
     const handleAddProduct = async () => {
         try {
             setIsLoading(true);
