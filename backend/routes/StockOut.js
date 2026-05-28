@@ -18,20 +18,20 @@ router.post('/AddNew', async (req, res) => {
         return total + item.Quantity;
     }, 0);
 
-    const stockOut = await StockOut.find({ Product_Id });
+    const stock_Out = await Stock_Out.find({ Product_Id });
 
-    const totalStockOut = stockOut.reduce((total, item) => {
+    const totalStockOut = stock_Out.reduce((total, item) => {
         return total + item.Quantity;
     }, 0);
 
     const remainingStock = totalstockIn - totalStockOut;
-    
+
     if (Quantity > remainingStock) {
         return res.status(403).json({ message: `You don't have this amount in stock. Your stock is ${remainingStock} `})
     }
-    const StockOut = await Stock_Out.create({ Product_Id, Date, Quantity, });
+    const Stock_Outs = await Stock_Out.create({ Product_Id, Date, Quantity });
 
-    return res.status(201).json({ message: 'New Stock Out added successfully', stockOut: StockOut });
+    return res.status(201).json({ message: 'New Stock Out added successfully', stockOut: Stock_Outs });
 } catch (err) {
     console.error(err);
     return res.status(500).json({ message: 'Internal server error' });
