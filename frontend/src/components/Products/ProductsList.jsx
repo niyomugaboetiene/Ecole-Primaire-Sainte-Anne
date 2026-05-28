@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { FaTrash, FaEdit } from "react-icons/fa";
 
 const ProductList = () => {
     const [products, setProducts] = useState(null);
@@ -38,12 +39,14 @@ const ProductList = () => {
                     <tbody>
                         {products?.map((prod, index) => (
                             <tr key={index} className={index % 2 === 0 ? 'bg-sky-200 hover:bg-sky-300 transition-colors' : 'bg-gray-200 hover:bg-gray-300 transition-colors text-gray-800 font-bold'}>
-                                <td className="py-2 px-3 text-left ">{prod.Product_Id}</td>
-                                <td className="py-2 px-3 text-left">{prod.Product_Name}</td>
-                                <td className="py-2 px-3 text-left">{new Date(prod?.createdAt).toLocaleDateString() || "No Date"}</td>
+                                <td className="py-3 px-3 text-left ">{prod.Product_Id}</td>
+                                <td className="py-3 px-3 text-left">{prod.Product_Name}</td>
+                                <td className="py-3 px-3 text-left">{new Date(prod?.createdAt).toLocaleDateString() || "No Date"}</td>
 
-                                <td><Link>Update</Link>
-                                <button>Delete</button></td>
+                                <td className="flex justify-between">
+                                    <Link to={`/products/update/${prod._id}`} className="inline-flex bg-green-300 rounded-lg hover:bg-green-400  transition-colors text-gray-700 py-2 px-4 mt-2"><FaEdit /> Update</Link>
+                                    <button className="inline-flex"><FaTrash /> Delete</button>
+                                </td>
                             </tr>
                         ))}
                     </tbody>
