@@ -56,7 +56,7 @@ const StockOutList = () => {
                                 <td className="py-3 px-3 text-left ">{prod.Quantity}</td>
 
                                 <td className="flex justify-between">
-                                    <Link to={`/stockIn/update/${prod._id}`} className="inline-flex bg-green-300 rounded-lg hover:bg-green-400  transition-colors text-white py-2 px-4 mt-2"><FaEdit /> Update</Link>
+                                    <Link to={`/stockOut/update/${prod._id}`} className="inline-flex bg-green-300 rounded-lg hover:bg-green-400  transition-colors text-white py-2 px-4 mt-2"><FaEdit /> Update</Link>
                                     <button className="inline-flex bg-red-300 rounded-lg hover:bg-red-400  transition-colors text-white py-2 px-4 mt-2" onClick={() => handlDeleteStock(prod._id)}><FaTrash /> Delete</button>
                                 </td>
                             </tr>

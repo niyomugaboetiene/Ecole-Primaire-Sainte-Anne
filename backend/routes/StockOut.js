@@ -42,7 +42,7 @@ router.get('/list', async (req, res) => {
     try {
         const List = await Stock_Out.find().populate("Product_Id");
 
-        if (List.length === 0) {
+        if (!List) {
             return res.status(404).json({ message: 'No Stock in the system' });
         } 
 
@@ -62,7 +62,7 @@ router.get('/single/:_id', async (req, res) => {
         }
         const List = await Stock_In.findById(_id).populate("Product_Id");
 
-        if (List.length === 0) {
+        if (!List) {
             return res.status(404).json({ message: 'No stock in in the system' });
         } 
 
