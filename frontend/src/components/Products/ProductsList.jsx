@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const ProductList = () => {
     const [products, setProducts] = useState(null);
@@ -30,6 +31,7 @@ const ProductList = () => {
                             <th className="py-2 px-3 text-left">Product Id</th>
                             <th className="py-2 px-3 text-left">Product Name</th>
                             <th className="py-2 px-3 text-left">Done at</th>
+                            <th className="py-2 px-3 text-left">Actions</th>
                         </tr>
                     </thead>
 
@@ -39,6 +41,9 @@ const ProductList = () => {
                                 <td className="py-2 px-3 text-left ">{prod.Product_Id}</td>
                                 <td className="py-2 px-3 text-left">{prod.Product_Name}</td>
                                 <td className="py-2 px-3 text-left">{new Date(prod?.createdAt).toLocaleDateString() || "No Date"}</td>
+
+                                <td><Link>Update</Link>
+                                <button>Delete</button></td>
                             </tr>
                         ))}
                     </tbody>
