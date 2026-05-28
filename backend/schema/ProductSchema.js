@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 const ProductSchema =new  mongoose.Schema({
     Product_Id: { type: Number, unique: true  },
     Product_Name: { type: String, required: true }
-});
+}, { timestamps: true });
 
 const Product = mongoose.model("products", ProductSchema);
 
