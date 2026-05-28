@@ -30,7 +30,14 @@ const AddStockIn = () => {
 
     const handleAddStock = async () => {
         try {
-            
+            setLoading(true);
+            const res = await axios.post('http://localhost:5000/stockIn/AddNew', { Product_Id, Date, Quantity, Unit_price });
+            setMessage(res.data.message);
+            setLoading(false);
+        } catch (err) {
+            console.error(err);
+            const errorMessage = err.response?.data?.message || "Error occured";
+            setMessage(errorMessage);
         }
     }
 }
