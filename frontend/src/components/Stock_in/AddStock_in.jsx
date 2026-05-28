@@ -57,13 +57,17 @@ const AddStockIn = () => {
                     )}
                 </div>
 
-                    <h1 className="text-center text-gray-700 font-bold text-lg">Add Products</h1>
+                    <h1 className="text-center text-gray-700 font-bold text-lg">Add Stock In</h1>
                 <div className="mt-2">
-                    <label htmlFor="" className="text-gray-800 text-lg block">Product Id</label>
-                    <input type="text" 
-                    className="w-full bg-sky-100 py-2 p-1 rounded-full mt-1 focus:outline-1 focus:outline-sky-300"
-                    placeholder="Enter Product Id (unique)"
-                     onChange={(e) => setProduct_Id(e.target.value)} />
+                    <label htmlFor="" className="text-gray-800 text-lg block">Products</label>
+                    <select 
+                       className="w-full bg-sky-100 py-2 p-1 rounded-full mt-1 focus:outline-1 focus:outline-sky-300"
+                       onChange={(e) => setProduct_Id(e.target.value)}
+                    >
+                      {products?.map((prod, index) => (
+                        <option key={index} value={prod._id}>{prod.Product_Name}</option>
+                      ))}
+                    </select> 
                 </div>
                 <div className="mt-2">
                  <label htmlFor="" className="text-gray-800 text-lg block">Product Name</label>
