@@ -90,7 +90,18 @@ router.put('/update/:_id', async (req, res) => {
 
        const totalStockOutQauntity = stocksOut.reduce((total, item) => {
         return total + item.Quantity;
-       })
+       });
+
+       const remainingStock = totalStockInQauntity - totalStockOutQauntity;
+
+       const receivedFields = {};
+
+       if (Date) receivedFields.Date = Date;
+       if (Quantity > remainingStock) {
+           return res.status(403).json({ message: `You don't have this Quantity in stock. Your stock is ${remainingStock}`})
+       }
+       receivedFields.Quantity = Quantity;
+       
         return res.status(201).json({ message: 'Stock In Updated successfully', stockIn: StockIN });
      } catch (err) {
          console.error(err);
