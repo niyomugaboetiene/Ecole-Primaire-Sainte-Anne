@@ -11,7 +11,17 @@ const AddProduct = () => {
 
     const handleAddProduct = async () => {
         try {
+            if (!Product_Id || !Product_Name) {
+                setMessage("Fill out all missing fields");
+            }
             
+            setIsLoading(true);
+            const res = await axios.post('http://localhost:5000/products/AddNew', { Product_Id, Product_Name });
+            setMessage(res.data.message);
+        } catch (err) {
+            const errorMessage = err.response?.data?.message || "Error occured";
+            console.error(err);
+            setError(errorMessage);
         }
     }
 }
