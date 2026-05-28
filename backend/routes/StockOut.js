@@ -83,7 +83,13 @@ router.put('/update/:_id', async (req, res) => {
        const stocksIn = await Stock_In.find({ Product_Id });
        
        const totalStockInQauntity = stocksIn.reduce((total, item) => {
-        return total + item;
+        return total + item.Quantity;
+       })
+
+       const stocksOut = await Stock_Out.find({ Product_Id });
+
+       const totalStockOutQauntity = stocksOut.reduce((total, item) => {
+        return total + item.Quantity;
        })
         return res.status(201).json({ message: 'Stock In Updated successfully', stockIn: StockIN });
      } catch (err) {
