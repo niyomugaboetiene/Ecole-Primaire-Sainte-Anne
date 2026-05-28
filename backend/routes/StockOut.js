@@ -78,6 +78,11 @@ router.put('/update/:_id', async (req, res) => {
   try {
        
        const _id = req.params._id;
+
+       if (!_id) {
+           return res.status(400).json({ message: 'Fill out missing _id' });
+       }
+
        const  {Product_Id, Date, Quantity }  = req.body;
   
        const stocksIn = await Stock_In.find({ Product_Id });
@@ -101,8 +106,10 @@ router.put('/update/:_id', async (req, res) => {
            return res.status(403).json({ message: `You don't have this Quantity in stock. Your stock is ${remainingStock}`})
        }
        receivedFields.Quantity = Quantity;
-       
-        return res.status(201).json({ message: 'Stock In Updated successfully', stockIn: StockIN });
+
+       const UpdatedStockOut = await Stock_Out.findByIdAndUpdate(_id, receivedFields, { new: true });
+
+        return res.status(201).json({ message: 'Stock In Updated successfully', updated: UpdatedStockOut });
      } catch (err) {
          console.error(err);
          return res.status(500).json({ message: 'Internal server error' });
