@@ -162,5 +162,24 @@ router.get('/report', async (req, res) => {
         console.error(err);
         return res.status(500).json({ message: 'Internal server error '})
     }
+});
+
+// get report per product
+
+router.get('/product/:Product_Id', async (req, res) => {
+    try {
+        const { Product_Id } = req.params;
+
+        const stockIn = await Stock_In.find({ Product_Id }).populate("Product_Id");
+        const stockOut = await Stock_Out.find({ Product_Id }).populate("Product_Id");
+
+        const totalStockOut = stockOut.reduce((total, item) => {
+            return total + item.Quantity;
+        }, 0);
+        
+        const totalStockOut = stockOut.reduce((total, item) => {
+            return total + item.Quantity;
+        }, 0);
+    }
 })
 export default router;
