@@ -1,19 +1,20 @@
-import Product from "../schema/ProductSchema.js";
+import Stock_In from "../schema/Stock_InSchema.js";
 import express from "express"
 
 const router = express.Router();
 
 router.post('/AddNew', async (req, res) => {
     try {
-    const  {Product_Name, Product_Id}  = req.body;
+    const  {Product_Id, Date, Quantity, Unit_price }  = req.body;
 
-    if (!Product_Name) {
-        return res.status(400).json({ message: 'Please fill out name of product' });
+    if (!Product_Id || !Date || !Quantity || !Unit_price) {
+        return res.status(400).json({ message: 'Please fill out missing details' });
     }
 
-    const newProduct = await Product.create({ Product_Id, Product_Name});
+    const Total_price = Quantity * Unit_price;
+    const StockIN = await Stock_In.create({ Product_Id, Date, Quantity, Unit_price, Total_price  });
 
-    return res.status(201).json({ message: 'New product added successfully', product: newProduct });
+    return res.status(201).json({ message: 'New Stock In added successfully', stockIn: StockIN });
 } catch (err) {
     console.error(err);
     return res.status(500).json({ message: 'Internal server error' });
@@ -22,13 +23,13 @@ router.post('/AddNew', async (req, res) => {
 
 router.get('/list', async (req, res) => {
     try {
-        const List = await Product.find();
+        const List = await Stock_In.find();
 
         if (List.length === 0) {
-            return res.status(404).json({ message: 'No product in the system' });
+            return res.status(404).json({ message: 'No Stock in the system' });
         } 
 
-        return res.status(200).json({ message: 'Product list', list: List });
+        return res.status(200).json({ message: 'Stock list', list: List });
     } catch (err) {
         console.error(err);
         return res.status(500).json({ message: 'Internal server error' });
@@ -42,7 +43,7 @@ router.get('/single/:_id', async (req, res) => {
         if (!_id) {
             return res.status(404).json({ message: 'Product Id is required' });
         }
-        const List = await Product.findById(_id);
+        const List = await Stock_In.findById(_id);
 
         if (List.length === 0) {
             return res.status(404).json({ message: 'No product in the system' });
@@ -66,7 +67,7 @@ router.put('/update/:_id', async (req, res) => {
         let newFields = {}
         if (Product_Name) newFields.Product_Name = Product_Name;
 
-        const updatedProduct = await Product.findByIdAndUpdate(_id, newFields, { new: true });
+        const updatedProduct = await Stock_In.findByIdAndUpdate(_id, newFields, { new: true });
 
         return res.status(200).json({ message: 'Updated successfully', new: updatedProduct });
     } catch (err) {
@@ -81,7 +82,7 @@ router.delete('/delete/:_id', async (req, res) => {
 
         if (!_id) return res.status(400).json({ message: 'Fill out missing fields' });
 
-        await Product.findByIdAndDelete(_id);
+        await Stock_In.findByIdAndDelete(_id);
 
         return res.status(200).json({ message: 'Deleted successfully' });
     } catch (err) {
