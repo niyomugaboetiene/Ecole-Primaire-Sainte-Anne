@@ -18,10 +18,12 @@ const AddProduct = () => {
             setIsLoading(true);
             const res = await axios.post('http://localhost:5000/products/AddNew', { Product_Id, Product_Name });
             setMessage(res.data.message);
+            setError("");
         } catch (err) {
             const errorMessage = err.response?.data?.message || "Error occured";
             console.error(err);
             setError(errorMessage);
+            setMessage("");
         }
     }
 
@@ -40,6 +42,8 @@ const AddProduct = () => {
                         </div>
                     )}
                 </div>
+
+                <h1>Add Product</h1>
                 <div>
                     <label htmlFor="">Product Id</label>
                     <input type="text" placeholder="Enter Product Id (unique)" onChange={(e) => setProduct_Id(e.target.value)} />
