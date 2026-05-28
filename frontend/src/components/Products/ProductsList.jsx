@@ -21,6 +21,18 @@ const ProductList = () => {
         handleGetProducts();
     }, []);
 
+    const handlDeleteProduct = async (_id) => {
+        try {
+            const confirm = window.confirm("Are you sure ?");
+            if (confirm){
+                await axios.delete(`http://localhost:5000/products/delete/${_id}`);
+                await handleGetProducts();
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
     return (
         <div className="bg-sky-100 min-h-screen w-full">
             <div className="">
@@ -45,7 +57,7 @@ const ProductList = () => {
 
                                 <td className="flex justify-between">
                                     <Link to={`/products/update/${prod._id}`} className="inline-flex bg-green-300 rounded-lg hover:bg-green-400  transition-colors text-white py-2 px-4 mt-2"><FaEdit /> Update</Link>
-                                    <button className="inline-flex bg-red-300 rounded-lg hover:bg-green-400  transition-colors text-white py-2 px-4 mt-2"><FaTrash /> Delete</button>
+                                    <button className="inline-flex bg-red-300 rounded-lg hover:bg-red-400  transition-colors text-white py-2 px-4 mt-2" onClick={() => handlDeleteProduct(prod._id)}><FaTrash /> Delete</button>
                                 </td>
                             </tr>
                         ))}
