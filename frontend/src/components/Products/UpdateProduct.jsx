@@ -28,8 +28,8 @@ const UpdateProduct = () => {
     useEffect(() => {
         handleGetExistingProduct();
     }, [_id]);
-    
-    const handleAddProduct = async () => {
+
+    const handleUpdateProduct = async () => {
         try {
             setIsLoading(true);
             const res = await axios.post(`http://localhost:5000/products/update/${_id}`, { Product_Id, Product_Name });
@@ -75,7 +75,7 @@ const UpdateProduct = () => {
                  onChange={(e) => setProduct_Name(e.target.value)} />
                 </div>
 
-                <button onClick={handleAddProduct} className="w-full flex justify-center items-center  mt-6 bg-sky-300 py-2 gap-3 text-white font-bold rounded-full hover:bg-sky-400 transition-colors"><FaEdit />Update</button>
+                <button onClick={handleUpdateProduct} className="w-full flex justify-center items-center  mt-6 bg-sky-300 py-2 gap-3 text-white font-bold rounded-full hover:bg-sky-400 transition-colors"><FaEdit />Update</button>
             </div>
         </div>
     )
