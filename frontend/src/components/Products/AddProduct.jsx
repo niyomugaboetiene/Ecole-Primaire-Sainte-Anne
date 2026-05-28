@@ -45,7 +45,7 @@ const AddProduct = () => {
                     )}
                 </div>
 
-                <h1>Add Product</h1>
+                    <h1>Add Products</h1>
                 <div>
                     <label htmlFor="">Product Id</label>
                     <input type="text" placeholder="Enter Product Id (unique)" onChange={(e) => setProduct_Id(e.target.value)} />
@@ -55,7 +55,7 @@ const AddProduct = () => {
                  <input type="text" placeholder="Enter Product Name" onChange={(e) => setProduct_Name(e.target.value)} />
                 </div>
 
-                <button onClick={handleAddProduct}>Add</button>
+                <button onClick={handleAddProduct}><FaPlus />Add</button>
             </div>
         </div>
     )
