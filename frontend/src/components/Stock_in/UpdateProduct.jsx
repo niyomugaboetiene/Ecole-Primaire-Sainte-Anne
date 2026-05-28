@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { FaPlus } from "react-icons/fa";
+import { FaEdit, FaPlus } from "react-icons/fa";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const AddStockIn = () => {
+const UpdateStockIn = () => {
     // Product_Id, Date, Quantity, Unit_price
     const [Product_Id, setProduct_Id] = useState(null);
     const [Date, setDate] = useState(null);
@@ -13,9 +13,28 @@ const AddStockIn = () => {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
 
+    const [stockIn, setStockIn] = useState(null);
+
+    const { _id } = useNavigate();
+
     const navigate = useNavigate();
     
     const [products, setProducts] = useState(null);
+
+    const handleGetStock = async () => {
+       try {
+           const res = await axios.get('http://localhost:5000/stockIn/list')
+
+           setStockIn(res.data.list);
+           console.log("P name", res.data.list);
+       } catch (err) {
+        console.error(err);
+       }
+    }
+
+    useEffect(() => {
+        handleGetStock();
+    }, []);
 
     const handleGetProducts = async () => {
        try {
@@ -31,10 +50,10 @@ const AddStockIn = () => {
         handleGetProducts();
     }, []);
 
-    const handleAddStock = async () => {
+    const handleUpdateStock = async () => {
         try {
             setLoading(true);
-            const res = await axios.post('http://localhost:5000/stockIn/AddNew', { Product_Id, Date, Quantity, Unit_price });
+            const res = await axios.put(`http://localhost:5000/stockIn/update/${_id}`, { Product_Id, Date, Quantity, Unit_price });
             setMessage(res.data.message);
             setLoading(false);
             setTimeout(() => {
@@ -63,7 +82,7 @@ const AddStockIn = () => {
                     )}
                 </div>
 
-                    <h1 className="text-center text-gray-700 font-bold text-lg">Add Stock In</h1>
+                    <h1 className="text-center text-gray-700 font-bold text-lg">Update Stock In</h1>
                 <div className="mt-2">
                     <label htmlFor="" className="text-gray-800 text-lg block">Products</label>
                     <select 
@@ -99,10 +118,10 @@ const AddStockIn = () => {
                      onChange={(e) => setUnit_price(e.target.value)} />
                 </div>
 
-                <button onClick={handleAddStock} className="w-full flex justify-center items-center  mt-6 bg-sky-300 py-2 gap-3 text-white font-bold rounded-full hover:bg-sky-400 transition-colors"><FaPlus />Add</button>
+                <button onClick={handleUpdateStock} className="w-full flex justify-center items-center  mt-6 bg-sky-300 py-2 gap-3 text-white font-bold rounded-full hover:bg-sky-400 transition-colors"><FaEdit />Update</button>
             </div>
         </div>
     )
 }
 
-export default AddStockIn;
+export default UpdateStockIn;
