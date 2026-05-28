@@ -70,11 +70,27 @@ const AddStockIn = () => {
                     </select> 
                 </div>
                 <div className="mt-2">
-                 <label htmlFor="" className="text-gray-800 text-lg block">Product Name</label>
-                 <input type="text" 
-                 placeholder="Enter Product Name" 
-                 className="w-full bg-sky-100 py-2 p-1 rounded-full mt-1 focus:outline-1 focus:outline-sky-300"
-                 onChange={(e) => setProduct_Name(e.target.value)} />
+                 <label htmlFor="" className="text-gray-800 text-lg block">Date</label>
+                 <input type="date" 
+                     placeholder="Enter Product Name" 
+                     className="w-full bg-sky-100 py-2 p-1 rounded-full mt-1 focus:outline-1 focus:outline-sky-300"
+                     onChange={(e) => setDate(e.target.value)} />
+                </div>
+                
+                <div className="mt-2">
+                 <label htmlFor="" className="text-gray-800 text-lg block">Qauntity</label>
+                 <input type="number" 
+                     placeholder="Enter Product Quantity" 
+                     className="w-full bg-sky-100 py-2 p-1 rounded-full mt-1 focus:outline-1 focus:outline-sky-300"
+                     onChange={(e) => setQuantity(e.target.value)} />
+                </div>
+                
+                <div className="mt-2">
+                 <label htmlFor="" className="text-gray-800 text-lg block">Date</label>
+                 <input type="number" 
+                     placeholder="Enter Unit price" 
+                     className="w-full bg-sky-100 py-2 p-1 rounded-full mt-1 focus:outline-1 focus:outline-sky-300"
+                     onChange={(e) => setUnit_price(e.target.value)} />
                 </div>
 
                 <button onClick={handleAddStock} className="w-full flex justify-center items-center  mt-6 bg-sky-300 py-2 gap-3 text-white font-bold rounded-full hover:bg-sky-400 transition-colors"><FaPlus />Add</button>
