@@ -40,7 +40,7 @@ router.post('/AddNew', async (req, res) => {
 
 router.get('/list', async (req, res) => {
     try {
-        const List = await Stock_In.find();
+        const List = await Stock_In.find().populate("products");
 
         if (List.length === 0) {
             return res.status(404).json({ message: 'No Stock in the system' });
@@ -60,7 +60,7 @@ router.get('/single/:_id', async (req, res) => {
         if (!_id) {
             return res.status(404).json({ message: 'Stock Id is required' });
         }
-        const List = await Stock_In.findById(_id);
+        const List = await Stock_In.findById(_id).populate("products");
 
         if (List.length === 0) {
             return res.status(404).json({ message: 'No stock in in the system' });
@@ -78,24 +78,13 @@ router.put('/update/:_id', async (req, res) => {
   try {
        
        const _id = req.params._id;
-       const  {Product_Id, Date, Quantity, Unit_price }  = req.body;
+       const  {Product_Id, Date, Quantity }  = req.body;
   
-       let receivedFields = {};
-
-       if (Product_Id) receivedFields.Product_Id = Product_Id;
-       if (Date) receivedFields.Date = Date;
-       if (Quantity) receivedFields.Quantity = Quantity;
-       if (Unit_price) receivedFields.Unit_price = Unit_price;
-
-       let Total_price;
-       if (Quantity || Unit_price) {
-            Total_price = Quantity * Unit_price;
-       }
-
-       if (Total_price) receivedFields.Total_price = Total_price;
-
-        const StockIN = await Stock_In.findByIdAndUpdate(_id, receivedFields, { new: true });
-
+       const stocksIn = await Stock_In.find({ Product_Id });
+       
+       const totalStockInQauntity = stocksIn.reduce((total, item) => {
+        return total + item;
+       })
         return res.status(201).json({ message: 'Stock In Updated successfully', stockIn: StockIN });
      } catch (err) {
          console.error(err);
