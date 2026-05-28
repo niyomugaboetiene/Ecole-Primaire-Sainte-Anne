@@ -1,5 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
+import { FaPlus, FaProductHunt} from "react-icons/fa";
+import { SiIfood} from "react-icons/si";
 
 const AddProduct = () => {
     const [Product_Id, setProduct_Id] = useState(0);
