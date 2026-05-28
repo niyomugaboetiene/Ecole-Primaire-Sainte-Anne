@@ -46,15 +46,15 @@ const StockInList = () => {
                             <th className="py-2 px-3 text-left">Quantity</th>
                             <th className="py-2 px-3 text-left">Price Unit</th>
                             <th className="py-2 px-3 text-left">Total Price</th>
+                            <th className="py-2 px-3 text-left">Actions</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        {products?.map((prod, index) => (
+                        {stockIn?.map((prod, index) => (
                             <tr key={index} className={index % 2 === 0 ? 'bg-sky-200 hover:bg-sky-300 transition-colors' : 'bg-gray-200 hover:bg-gray-300 transition-colors text-gray-800 font-bold'}>
                                 <td className="py-3 px-3 text-left ">{prod.Product_Id?.Product_Name}</td>
                                 <td className="py-3 px-3 text-left">{new Date(prod.Date).toLocaleDateString()}</td>
-                                <td className="py-3 px-3 text-left ">{prod.Quantity}</td>
                                 <td className="py-3 px-3 text-left ">{prod.Quantity}</td>
                                 <td className="py-3 px-3 text-left ">{prod.Unit_price}</td>
                                 <td className="py-3 px-3 text-left ">{prod.Total_price}</td>
