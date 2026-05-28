@@ -44,8 +44,8 @@ const ProductList = () => {
                                 <td className="py-3 px-3 text-left">{new Date(prod?.createdAt).toLocaleDateString() || "No Date"}</td>
 
                                 <td className="flex justify-between">
-                                    <Link to={`/products/update/${prod._id}`} className="inline-flex bg-green-300 rounded-lg hover:bg-green-400  transition-colors text-gray-700 py-2 px-4 mt-2"><FaEdit /> Update</Link>
-                                    <button className="inline-flex"><FaTrash /> Delete</button>
+                                    <Link to={`/products/update/${prod._id}`} className="inline-flex bg-green-300 rounded-lg hover:bg-green-400  transition-colors text-white py-2 px-4 mt-2"><FaEdit /> Update</Link>
+                                    <button className="inline-flex bg-red-300 rounded-lg hover:bg-green-400  transition-colors text-white py-2 px-4 mt-2"><FaTrash /> Delete</button>
                                 </td>
                             </tr>
                         ))}
