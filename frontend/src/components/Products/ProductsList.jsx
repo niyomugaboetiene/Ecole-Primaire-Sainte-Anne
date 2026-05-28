@@ -20,12 +20,14 @@ const ProductList = () => {
     }, []);
 
     return (
-        <div>
-            <div>
-                <table border={2}>
-                    <thead>
+        <div className="bg-sky-100 min-h-screen flex justify-center">
+            <div className="mt-5">
+                <h1 className="text-xl font-bold text-center text-sky-500 mb-2">Products List</h1>
+                <div className="max-w-7xl">
+                  <table border={2}>
+                    <thead className="bg-sky-300 text-gray-800">
                         <tr>
-                            <th>Product Id</th>
+                            <th className="py-2 px-3">Product Id</th>
                             <th>Product Name</th>
                             <th>Done at</th>
                         </tr>
@@ -41,6 +43,8 @@ const ProductList = () => {
                         ))}
                     </tbody>
                 </table>
+                </div>
+               
             </div>
         </div>
     )
