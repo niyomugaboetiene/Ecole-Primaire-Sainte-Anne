@@ -12,6 +12,8 @@ import AddStockOut from "./components/Stock_out/AddStockOut";
 import StockOutList from "./components/Stock_out/StockOutList";
 import UpdateStockOut from "./components/Stock_out/UpdateStockOut";
 
+import Report from "./components/Stock_out/Report";
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
 
@@ -31,6 +33,8 @@ function App() {
           <Route path="/stockOut/AddNew" element={<AddStockOut /> }/>
           <Route path="/stockOut/list" element={<StockOutList /> }/>
           <Route path="/stockOut/update/:_id" element={<UpdateStockOut /> }/>
+
+          <Route path="/report" element={<Report />} />
         </Routes>
      </BrowserRouter>
   )

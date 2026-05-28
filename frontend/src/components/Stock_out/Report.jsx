@@ -1,0 +1,65 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import {  FaEye } from "react-icons/fa";
+
+const Report = () => {
+    const [report, setReport] = useState(null);
+    
+
+    const handleGetReport = async () => {
+       try {
+           const res = await axios.get('http://localhost:5000/stockOut/report')
+
+           setReport(res.data.summary);
+       } catch (err) {
+        console.error(err);
+       }
+    }
+
+    useEffect(() => {
+        handleGetReport();
+    }, []);
+
+    return (
+        <div className="bg-sky-100 min-h-screen w-full">
+            <div className="">
+                {/* stockIn, stockOut, totalStockIn, totalStockOut, remainingStock */}
+                <h1 className="text-xl font-bold text-center text-sky-500 mb-2">Reports</h1>
+                <div className="max-w-7xl mx-auto w-full">
+                  <table border={2} className="w-full">
+                    <thead className="bg-sky-300 text-gray-700">
+                        <tr>
+                            <th className="py-2 px-3 text-left">Product Name</th>
+                            <th className="py-2 px-3 text-left">Date</th>
+                            <th className="py-2 px-3 text-left">Quantity</th>
+                            <th className="py-2 px-3 text-left">Stock In</th>
+                            <th className="py-2 px-3 text-left">Stock Out</th>
+                            <th className="py-2 px-3 text-left">Remainig Stock</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {report?.map((prod, index) => (
+                            <tr key={index} className={index % 2 === 0 ? 'bg-sky-200 hover:bg-sky-300 transition-colors' : 'bg-gray-200 hover:bg-gray-300 transition-colors text-gray-800 font-bold'}>
+                                <td className="py-3 px-3 text-left ">{prod.stockIn?.Product_Id.Product_Name}</td>
+                                <td className="py-3 px-3 text-left">{new Date(prod.stockIn?.Product_Id.createdAt).toLocaleDateString()}</td>
+                                <td className="py-3 px-3 text-left ">{prod.Quantity}</td>
+                                <td className="py-3 px-3 text-left ">{prod.totalStockIn}</td>
+                                <td className="py-3 px-3 text-left ">{prod.remainingStock}</td>
+
+                                <td className="flex justify-between">
+                                    <Link to={`/stockIn/update/${prod._id}`} className="inline-flex bg-green-300 rounded-lg hover:bg-green-400  transition-colors text-white py-2 px-4 mt-2"><FaEye /> View</Link>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+                </div>
+               
+            </div>
+        </div>
+    )
+}
+
+export default Report;
