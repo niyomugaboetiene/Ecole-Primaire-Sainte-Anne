@@ -30,8 +30,8 @@ const AddProduct = () => {
     }
 
     return (
-        <div>
-            <div>
+        <div className="bg-sky-200 min-h-screen flex justify-center items-center">
+            <div className="bg-white p-2 h-70 w-90 rounded-lg shadow-lg">
                 <div>
                     {message && (
                         <div>
@@ -45,17 +45,23 @@ const AddProduct = () => {
                     )}
                 </div>
 
-                    <h1>Add Products</h1>
-                <div>
-                    <label htmlFor="">Product Id</label>
-                    <input type="text" placeholder="Enter Product Id (unique)" onChange={(e) => setProduct_Id(e.target.value)} />
+                    <h1 className="text-center text-gray-700 font-bold text-lg">Add Products</h1>
+                <div className="mt-2">
+                    <label htmlFor="" className="text-gray-800 text-lg block">Product Id</label>
+                    <input type="text" 
+                    className="w-full bg-sky-100 py-2 p-1 rounded-full mt-1"
+                    placeholder="Enter Product Id (unique)"
+                     onChange={(e) => setProduct_Id(e.target.value)} />
                 </div>
-                <div>
-                 <label htmlFor="">Product Name</label>
-                 <input type="text" placeholder="Enter Product Name" onChange={(e) => setProduct_Name(e.target.value)} />
+                <div className="mt-2">
+                 <label htmlFor="" className="text-gray-800 text-lg block">Product Name</label>
+                 <input type="text" 
+                 placeholder="Enter Product Name" 
+                 className="w-full bg-sky-100 py-2 p-1 rounded-full mt-1"
+                 onChange={(e) => setProduct_Name(e.target.value)} />
                 </div>
 
-                <button onClick={handleAddProduct}><FaPlus />Add</button>
+                <button onClick={handleAddProduct} className="w-full flex justify-center items-center  mt-6 bg-sky-300 py-2 gap-3 text-white font-bold rounded-full hover:bg-sky-400 transition-colors"><FaPlus />Add</button>
             </div>
         </div>
     )
