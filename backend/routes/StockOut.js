@@ -12,11 +12,22 @@ router.post('/AddNew', async (req, res) => {
         return res.status(400).json({ message: 'Please fill out missing details' });
     }
 
-    const stocks = await Stock_In.find({ Product_Id });
+    const stockIn = await Stock_In.find({ Product_Id });
 
-    const numberOfStockIN = stocks.Quantity;
-    if (Quantity > numberOfStockIN) {
-        return res.status(403).json({ message: `This Quantity is not in stock. in stock we have ${numberOfStockIN} `})
+    const totalstockIn = stockIn.reduce((total, item) => {
+        return total + item.Quantity;
+    }, 0);
+
+    const stockOut = await StockOut.find({ Product_Id });
+
+    const totalStockOut = stockOut.reduce((total, item) => {
+        return total + item.Quantity;
+    }, 0);
+
+    const remainingStock = totalstockIn - totalStockOut;
+    
+    if (Quantity > remainingStock) {
+        return res.status(403).json({ message: `You don't have this amount in stock. Your stock is ${remainingStock} `})
     }
     const StockOut = await Stock_Out.create({ Product_Id, Date, Quantity, });
 
