@@ -52,12 +52,15 @@ const StockInList = () => {
                     <tbody>
                         {products?.map((prod, index) => (
                             <tr key={index} className={index % 2 === 0 ? 'bg-sky-200 hover:bg-sky-300 transition-colors' : 'bg-gray-200 hover:bg-gray-300 transition-colors text-gray-800 font-bold'}>
-                                <td className="py-3 px-3 text-left ">{prod.Product_Id}</td>
-                                <td className="py-3 px-3 text-left">{prod.Product_Name}</td>
-                                <td className="py-3 px-3 text-left">{new Date(prod?.createdAt).toLocaleDateString() || "No Date"}</td>
+                                <td className="py-3 px-3 text-left ">{prod.Product_Id?.Product_Name}</td>
+                                <td className="py-3 px-3 text-left">{new Date(prod.Date).toLocaleDateString()}</td>
+                                <td className="py-3 px-3 text-left ">{prod.Quantity}</td>
+                                <td className="py-3 px-3 text-left ">{prod.Quantity}</td>
+                                <td className="py-3 px-3 text-left ">{prod.Unit_price}</td>
+                                <td className="py-3 px-3 text-left ">{prod.Total_price}</td>
 
                                 <td className="flex justify-between">
-                                    <Link to={`/products/update/${prod._id}`} className="inline-flex bg-green-300 rounded-lg hover:bg-green-400  transition-colors text-white py-2 px-4 mt-2"><FaEdit /> Update</Link>
+                                    <Link to={`/stockin/update/${prod._id}`} className="inline-flex bg-green-300 rounded-lg hover:bg-green-400  transition-colors text-white py-2 px-4 mt-2"><FaEdit /> Update</Link>
                                     <button className="inline-flex bg-red-300 rounded-lg hover:bg-red-400  transition-colors text-white py-2 px-4 mt-2" onClick={() => handlDeleteStock(prod._id)}><FaTrash /> Delete</button>
                                 </td>
                             </tr>
