@@ -35,10 +35,10 @@ const ProductList = () => {
 
                     <tbody>
                         {products?.map((prod, index) => (
-                            <tr key={index}>
-                                <td>{prod.Product_Id}</td>
-                                <td>{prod.Product_Name}</td>
-                                <td>{new Date(prod?.createdAt).toLocaleDateString() || "No Date"}</td>
+                            <tr key={index} className={index % 2 === 0 ? 'bg-sky-200 hover:bg-sky-300 transition-colors' : 'bg-gray-200 hover:bg-gray-300 transition-colors text-gray-800 font-bold'}>
+                                <td className="py-2 px-3 text-left ">{prod.Product_Id}</td>
+                                <td className="py-2 px-3 text-left">{prod.Product_Name}</td>
+                                <td className="py-2 px-3 text-left">{new Date(prod?.createdAt).toLocaleDateString() || "No Date"}</td>
                             </tr>
                         ))}
                     </tbody>
