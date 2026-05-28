@@ -3,30 +3,30 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { FaTrash, FaEdit } from "react-icons/fa";
 
-const ProductList = () => {
-    const [products, setProducts] = useState(null);
+const StockInList = () => {
+    const [stockIn, setStockIn] = useState(null);
     
 
-    const handleGetProducts = async () => {
+    const handleGetStock = async () => {
        try {
-           const res = await axios.get('http://localhost:5000/products/list')
+           const res = await axios.get('http://localhost:5000/stockIn/list')
 
-           setProducts(res.data.list);
+           setStockIn(res.data.list);
        } catch (err) {
         console.error(err);
        }
     }
 
     useEffect(() => {
-        handleGetProducts();
+        handleGetStock();
     }, []);
 
-    const handlDeleteProduct = async (_id) => {
+    const handlDeleteStock = async (_id) => {
         try {
             const confirm = window.confirm("Are you sure ?");
             if (confirm){
-                await axios.delete(`http://localhost:5000/products/delete/${_id}`);
-                await handleGetProducts();
+                await axios.delete(`http://localhost:5000/stockIn/delete/${_id}`);
+                await handleGetStock();
             }
         } catch (err) {
             console.error(err);
@@ -36,7 +36,7 @@ const ProductList = () => {
     return (
         <div className="bg-sky-100 min-h-screen w-full">
             <div className="">
-                <h1 className="text-xl font-bold text-center text-sky-500 mb-2">Products List</h1>
+                <h1 className="text-xl font-bold text-center text-sky-500 mb-2">Stock In List</h1>
                 <div className="max-w-7xl mx-auto w-full">
                   <table border={2} className="w-full">
                     <thead className="bg-sky-300 text-gray-700">
@@ -57,7 +57,7 @@ const ProductList = () => {
 
                                 <td className="flex justify-between">
                                     <Link to={`/products/update/${prod._id}`} className="inline-flex bg-green-300 rounded-lg hover:bg-green-400  transition-colors text-white py-2 px-4 mt-2"><FaEdit /> Update</Link>
-                                    <button className="inline-flex bg-red-300 rounded-lg hover:bg-red-400  transition-colors text-white py-2 px-4 mt-2" onClick={() => handlDeleteProduct(prod._id)}><FaTrash /> Delete</button>
+                                    <button className="inline-flex bg-red-300 rounded-lg hover:bg-red-400  transition-colors text-white py-2 px-4 mt-2" onClick={() => handlDeleteStock(prod._id)}><FaTrash /> Delete</button>
                                 </td>
                             </tr>
                         ))}
@@ -70,4 +70,4 @@ const ProductList = () => {
     )
 }
 
-export default ProductList;
+export default StockInList;
