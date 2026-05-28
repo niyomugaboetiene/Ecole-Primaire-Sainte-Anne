@@ -41,10 +41,11 @@ const StockInList = () => {
                   <table border={2} className="w-full">
                     <thead className="bg-sky-300 text-gray-700">
                         <tr>
-                            <th className="py-2 px-3 text-left">Product Id</th>
                             <th className="py-2 px-3 text-left">Product Name</th>
-                            <th className="py-2 px-3 text-left">Done at</th>
-                            <th className="py-2 px-3 text-left">Actions</th>
+                            <th className="py-2 px-3 text-left">Date</th>
+                            <th className="py-2 px-3 text-left">Quantity</th>
+                            <th className="py-2 px-3 text-left">Price Unit</th>
+                            <th className="py-2 px-3 text-left">Total Price</th>
                         </tr>
                     </thead>
 
