@@ -25,11 +25,11 @@ const ProductList = () => {
                 <h1 className="text-xl font-bold text-center text-sky-500 mb-2">Products List</h1>
                 <div className="max-w-7xl mx-auto w-full">
                   <table border={2} className="w-full">
-                    <thead className="bg-sky-300 text-gray-800">
+                    <thead className="bg-sky-300 text-gray-700">
                         <tr>
-                            <th className="py-2 px-3">Product Id</th>
-                            <th>Product Name</th>
-                            <th>Done at</th>
+                            <th className="py-2 px-3 text-left">Product Id</th>
+                            <th className="py-2 px-3 text-left">Product Name</th>
+                            <th className="py-2 px-3 text-left">Done at</th>
                         </tr>
                     </thead>
 
