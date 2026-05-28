@@ -24,4 +24,21 @@ const AddProduct = () => {
             setError(errorMessage);
         }
     }
+
+    return (
+        <div>
+            <div>
+                <div>
+                    <label htmlFor="">Product Id</label>
+                    <input type="text" placeholder="Enter Product Id (unique)" onChange={(e) => setProduct_Id(e.target.value)} />
+                </div>
+                <div>
+                 <label htmlFor="">Product Name</label>
+                 <input type="text" placeholder="Enter Product Name" onChange={(e) => setProduct_Name(e.target.value)} />
+                </div>
+
+                <button onClick={handleAddProduct}>Add</button>
+            </div>
+        </div>
+    )
 }
