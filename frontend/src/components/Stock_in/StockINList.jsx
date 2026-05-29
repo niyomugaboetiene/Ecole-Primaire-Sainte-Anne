@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { FaTrash, FaEdit } from "react-icons/fa";
+import { FaTrash, FaEdit, FaPlus } from "react-icons/fa";
 import { FaSignInAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
@@ -62,7 +62,7 @@ const StockInList = () => {
                 <div className="max-w-7xl mx-auto w-full">
                    <div className="flex justify-between">
                         <h1 className="text-xl font-bold text-center text-sky-500 mb-2">Stock In List</h1>
-                        <button className="bg-sky-500 flex justify-center items-center py-3 px-6 rounded-lg text-white mb-3 hover:bg-sky-600 transition-colors" onClick={() => navigate('/product/AddNew')}><FaPlus /> Add New</button>
+                        <button className="bg-sky-500 flex justify-center items-center py-3 px-6 rounded-lg text-white mb-3 hover:bg-sky-600 transition-colors" onClick={() => navigate('/stockIn/AddNew')}><FaPlus /> Add New</button>
                     </div>
                   <table border={2} className="w-full">
                     <thead className="bg-sky-300 text-gray-700">
@@ -79,7 +79,7 @@ const StockInList = () => {
                     <tbody>
                         {stockIn?.map((prod, index) => (
                             <tr key={index} className={index % 2 === 0 ? 'bg-sky-200 hover:bg-sky-300 transition-colors' : 'bg-gray-200 hover:bg-gray-300 transition-colors text-gray-800 font-bold'}>
-                                <td className="py-3 px-3 text-left ">{prod.Product_Id?.Product_Name}</td>
+                                <td className="py-3 px-3 text-left ">{prod.Product_Id?.Product_Name || "Not specified"}</td>
                                 <td className="py-3 px-3 text-left">{new Date(prod.Date).toLocaleDateString()}</td>
                                 <td className="py-3 px-3 text-left ">{prod.Quantity}</td>
                                 <td className="py-3 px-3 text-left ">{prod.Unit_price}</td>

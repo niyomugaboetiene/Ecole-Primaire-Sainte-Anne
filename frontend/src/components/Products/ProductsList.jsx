@@ -63,7 +63,7 @@ const ProductList = () => {
                 <div className="max-w-7xl mx-auto w-full">
                    <div className="flex justify-between">
                     <h1 className="text-xl font-bold text-center text-sky-500 mb-2">Products List</h1>
-                    <button className="bg-sky-500 flex justify-center items-center py-3 px-6 rounded-lg text-white mb-3 hover:bg-sky-600 transition-colors" onClick={() => navigate('/product/AddNew')}><FaPlus /> Add New</button>
+                    <button className="bg-sky-500 flex justify-center items-center py-3 px-6 rounded-lg text-white mb-3 hover:bg-sky-600 transition-colors" onClick={() => navigate('/products/AddNew')}><FaPlus /> Add New</button>
                 </div>
                   <table border={2} className="w-full">
                     <thead className="bg-sky-300 text-gray-700">

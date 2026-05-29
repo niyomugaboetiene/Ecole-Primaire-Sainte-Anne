@@ -120,14 +120,14 @@ const Report = () => {
                     <tbody>
                         {report?.stockIn?.map((item, index) => (
                             <tr  className={'bg-sky-200 hover:bg-sky-300 transition-colors'} key={index}>
-                                <td className="py-3 px-3 text-left ">{item.Product_Id.Product_Name}</td>
+                                <td className="py-3 px-3 text-left ">{item.Product_Id?.Product_Name || "Not specified"}</td>
                                 <td className="py-3 px-3 text-left">{new Date(item.Date).toLocaleDateString()}</td>
                                 <td className="py-3 px-3 text-left ">{item.Quantity}</td>
                                 <td className="py-3 px-3 text-left ">{item.Unit_price}</td>
                                 <td className="py-3 px-3 text-left">{item.Total_price}</td>
 
                                 <td className="flex justify-between">
-                                    <Link to={`/stockIn/view/${item?.Product_Id._id}`} className="inline-flex bg-green-300 gap-2 rounded-lg hover:bg-green-400  transition-colors text-white py-2 px-4 mt-2" title="View Details"><FaEye className="mt-1" /> View</Link>
+                                    <Link to={`/stockIn/view/${item?.Product_Id?._id}`} className="inline-flex bg-green-300 gap-2 rounded-lg hover:bg-green-400  transition-colors text-white py-2 px-4 mt-2" title="View Details"><FaEye className="mt-1" /> View</Link>
                                 </td>
                             </tr>
                         ))}
@@ -151,12 +151,12 @@ const Report = () => {
                     <tbody>
                         {stockOuts?.map((item, index) => (
                             <tr  className={'bg-sky-200 hover:bg-sky-300 transition-colors'} key={index}>
-                                <td className="py-3 px-3 text-left ">{item.Product_Id.Product_Name}</td>
+                                <td className="py-3 px-3 text-left ">{item.Product_Id?.Product_Name || "Not specified"}</td>
                                 <td className="py-3 px-3 text-left">{new Date(item.Date).toLocaleDateString()}</td>
                                 <td className="py-3 px-3 text-left ">{item.Quantity}</td>
 
                                 <td className="flex justify-between">
-                                    <Link to={`/stockIn/view/${item?.Product_Id._id}`} className="inline-flex bg-green-300 gap-2 rounded-lg hover:bg-green-400  transition-colors text-white py-2 px-4 mt-2" title="View Details"><FaEye className="mt-1" /> View</Link>
+                                    <Link to={`/stockIn/view/${item?.Product_Id?._id}`} className="inline-flex bg-green-300 gap-2 rounded-lg hover:bg-green-400  transition-colors text-white py-2 px-4 mt-2" title="View Details"><FaEye className="mt-1" /> View</Link>
                                 </td>
                             </tr>
                         ))}
