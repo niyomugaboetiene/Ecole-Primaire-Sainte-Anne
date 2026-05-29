@@ -31,9 +31,12 @@ const ReportDeatils = () => {
                    <h1 className="text-md text-sky-700 font-bold">{details?.stockIn[0].Product_Id?.Product_Name}</h1>
                 </div>
                 <div className="bg-linear-to-b from-sky-200 to-sky-300 w-full h-full p-3 rounded-lg">
-                   <p>Product Id{details?.stockIn[0].Product_Id?.Product_Id}</p>
-                   <p>Stock In{details?.totalStockIN}</p>
-                   <p>Stock Out{details?.totalStockOut}</p>
+                   <p className="text-sm font-bold text-gray-700">Product Id</p>
+                   <p className="bg-sky-300 p-2 py-3 rounded-full">{details?.stockIn[0].Product_Id?.Product_Id}</p>
+                   <p className="text-sm font-bold text-gray-700">Stock In</p>
+                   <p className="bg-sky-300 p-2 py-3 rounded-full">{details?.totalStockIN}</p>
+                   <p className="text-sm font-bold text-gray-700">Stock Out</p>
+                   <p className="bg-sky-300 p-2 py-3 rounded-full">{details?.totalStockOut}</p>
                   <p>Remaining Stock{details?.remainingStock}</p>
                  </div>
             </div>
