@@ -15,6 +15,8 @@ import UpdateStockOut from "./components/Stock_out/UpdateStockOut";
 import Report from "./components/Stock_out/Report";
 import ReportDeatils from "./components/Stock_out/ReportDeatils";
 
+import NavBar from "./components/dashboard/NavBar";
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
 
@@ -37,6 +39,8 @@ function App() {
 
           <Route path="/report" element={<Report />} />
           <Route path="/stockIn/view/:Product_Id" element={<ReportDeatils />} />
+
+          <Route path="/nav" element={<NavBar /> }/>
         </Routes>
      </BrowserRouter>
   )
