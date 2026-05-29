@@ -22,6 +22,11 @@ function App() {
 
   return (
      <BrowserRouter>
+     <div className="pb-34">
+       <NavBar />
+
+     </div>
+
         <Routes>
           <Route path="/products/AddNew" element={<AddProduct />}/>
           <Route path="/products/list" element={<ProductList />}/>
@@ -40,7 +45,6 @@ function App() {
           <Route path="/report" element={<Report />} />
           <Route path="/stockIn/view/:Product_Id" element={<ReportDeatils />} />
 
-          <Route path="/nav" element={<NavBar /> }/>
         </Routes>
      </BrowserRouter>
   )
