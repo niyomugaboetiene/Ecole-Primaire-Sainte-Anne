@@ -16,4 +16,23 @@ const ReportDeatils = () => {
             console.error(err);
         }
     }
+
+    useEffect(() => {
+        handleGeDeails();
+    }, []);
+
+    return (
+        <div>
+            <div>
+                <h1>Product Deatils</h1>
+                <div>
+                     {details?.map((item, index) => (
+                        <div key={index}>
+
+                        </div>
+                     ))}
+                </div>
+            </div>
+        </div>
+    )
 }
