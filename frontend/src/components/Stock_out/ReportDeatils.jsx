@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
+import {FaQuit, FaNew} from "react-icons/fa"
 
 const ReportDeatils = () => {
     const { Product_Id } = useParams();
@@ -41,7 +42,7 @@ const ReportDeatils = () => {
                    <p className="bg-sky-300 p-2 py-3 rounded-full">{details?.remainingStock}</p>
 
                    <div className="flex justify-between mt-5 ">
-                    <button className="w-55 bg-linear-to-br text-white font-bold rounded-lg  py-2 from-red-600 hover:scale-105 transition duration-300 to-red-400">Back</button>
+                    <button className="w-55 bg-linear-to-br text-white font-bold rounded-lg  py-2 from-red-600 hover:scale-105 transition duration-300 to-red-400"><Fa />Back</button>
                     <button  className="w-55 bg-linear-to-br text-white font-bold rounded-lg  py-2 from-green-600 hover:scale-105 transition duration-300 to-green-400">Find New</button>
                    </div>
                  </div>
