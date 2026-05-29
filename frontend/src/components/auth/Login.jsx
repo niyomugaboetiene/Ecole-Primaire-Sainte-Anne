@@ -1,6 +1,5 @@
 import { useState } from "react";
 import axios from "axios";
-import { FaPlus} from "react-icons/fa";
 import { FaSignInAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
@@ -23,7 +22,7 @@ const Login = () => {
             setMessage(res.data.message);
             setError("");
             setTimeout(() => {
-                navigate('/');
+                navigate('/report');
             }, 2000);
         } catch (err) {
             const errorMessage = err.response?.data?.message || "Error occured";
@@ -50,23 +49,23 @@ const Login = () => {
                     )}
                 </div>
 
-                    <h1 className="text-center text-gray-700 font-bold text-lg">Add Products</h1>
+                    <h1 className="text-center text-gray-700 font-bold text-lg">Login</h1>
                 <div className="mt-2">
-                    <label htmlFor="" className="text-gray-800 text-lg block">Product Id</label>
+                    <label htmlFor="" className="text-gray-800 text-lg block">User Name</label>
                     <input type="text" 
                     className="w-full bg-sky-100 py-2 p-1 rounded-full mt-1 focus:outline-1 focus:outline-sky-300"
-                    placeholder="Enter Product Id (unique)"
-                     onChange={(e) => setProduct_Id(e.target.value)} />
+                    placeholder="Enter User Name"
+                     onChange={(e) => setUserName(e.target.value)} />
                 </div>
                 <div className="mt-2">
-                 <label htmlFor="" className="text-gray-800 text-lg block">Product Name</label>
-                 <input type="text" 
-                 placeholder="Enter Product Name" 
+                 <label htmlFor="" className="text-gray-800 text-lg block">Password</label>
+                 <input type="password" 
+                 placeholder="Enter Password" 
                  className="w-full bg-sky-100 py-2 p-1 rounded-full mt-1 focus:outline-1 focus:outline-sky-300"
-                 onChange={(e) => setProduct_Name(e.target.value)} />
+                 onChange={(e) => setPassword(e.target.value)} />
                 </div>
 
-                <button onClick={handleAddProduct} className="w-full flex justify-center items-center  mt-6 bg-sky-300 py-2 gap-3 text-white font-bold rounded-full hover:bg-sky-400 transition-colors"><FaPlus />Add</button>
+                <button onClick={handleLogin} className="w-full flex justify-center items-center  mt-6 bg-sky-300 py-2 gap-3 text-white font-bold rounded-full hover:bg-sky-400 transition-colors"><FaSignInAlt />Login</button>
             </div>
         </div>
     )
