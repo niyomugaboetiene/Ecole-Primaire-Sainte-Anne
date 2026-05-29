@@ -4,21 +4,22 @@ import { FaSignInAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-    const [UserNAme, setUserName] = useState("");
+    const [UserName, setUserName] = useState("");
     const [Password, setPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [message, setMessage] = useState("");
     const [error, setError] = useState("");
 
     const navigate = useNavigate();
+
     const handleLogin = async () => {
         try {
-            if (!UserNAme || !Password) {
+            if (!UserName || !Password) {
                 setMessage("Fill out all missing fields");
             }
             
             setIsLoading(true);
-            const res = await axios.post('http://localhost:5000/auth/login', { UserNAme, Password });
+            const res = await axios.post('http://localhost:5000/auth/login', { UserName, Password }, { withCredentials: true });
             setMessage(res.data.message);
             setError("");
             setTimeout(() => {

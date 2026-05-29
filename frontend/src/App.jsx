@@ -17,15 +17,16 @@ import ReportDeatils from "./components/Stock_out/ReportDeatils";
 
 import NavBar from "./components/dashboard/NavBar";
 
+// auth
+import Login from "./components/auth/Login";
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
 
   return (
      <BrowserRouter>
-     <div className="pb-34">
        <NavBar />
 
-     </div>
 
         <Routes>
           <Route path="/products/AddNew" element={<AddProduct />}/>
@@ -44,6 +45,8 @@ function App() {
 
           <Route path="/report" element={<Report />} />
           <Route path="/stockIn/view/:Product_Id" element={<ReportDeatils />} />
+
+          <Route path="/auth/login" element={<Login /> }/>
 
         </Routes>
      </BrowserRouter>

@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 const NavBar = () => {
     return (
-        <div className="fixed top-0 left-0 right-0 bottom-0">
+        <div className="fixed top-0 left-0 right-0 ">
           <div className="bg-sky-600">
                  <div className="p-1 flex justify-end gap-4">
-                    <Link className="flex gap-2 justify-center items-center text-white font-bold hover:scale-105 transition duration-200"><FaSignInAlt /> Login</Link>
+                    <Link className="flex gap-2 justify-center items-center text-white font-bold hover:scale-105 transition duration-200" to={'/auth/login'}><FaSignInAlt /> Login</Link>
                     <Link className="flex gap-2 justify-center items-center text-white font-bold hover:scale-105 transition duration-200"><FaUserPlus />Register</Link>
                  </div>
           </div>

@@ -3,10 +3,12 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import { FaSignInAlt } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const StockInList = () => {
     const [stockIn, setStockIn] = useState(null);
     const [isAuthorized, setIsAuthorized] = useState(true);
+    const navigate = useNavigate();
 
     const handleGetStock = async () => {
        try {

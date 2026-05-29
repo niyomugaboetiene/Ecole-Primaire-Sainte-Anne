@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import {  FaEye } from "react-icons/fa";
 import { FaSignInAlt } from "react-icons/fa";
-
+import { useNavigate } from "react-router-dom";
 const Report = () => {
     const [report, setReport] = useState(null);
 
@@ -13,6 +13,7 @@ const Report = () => {
 
     const [isAuthorized, setIsAuthorized] = useState(true);
     
+    const navigate = useNavigate();
 
     const handleGetReportOfStockIn = async () => {
        try {

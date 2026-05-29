@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { FaPlus} from "react-icons/fa";
 import { FaSignInAlt } from "react-icons/fa";
-
+import { useNavigate } from "react-router-dom";
 const AddProduct = () => {
     const [Product_Id, setProduct_Id] = useState(0);
     const [Product_Name, setProduct_Name] = useState("");
@@ -10,6 +10,8 @@ const AddProduct = () => {
     const [message, setMessage] = useState("");
     const [error, setError] = useState("");
     const [isAuthorized, setIsAuthorized] = useState(true);
+
+    const navigate = useNavigate();
 
 
     const handleAddProduct = async () => {
@@ -19,7 +21,7 @@ const AddProduct = () => {
             }
             
             setIsLoading(true);
-            const res = await axios.post('http://localhost:5000/products/AddNew', { Product_Id, Product_Name });
+            const res = await axios.post('http://localhost:5000/products/AddNew', { Product_Id, Product_Name }, { withCredentials: true });
             setMessage(res.data.message);
             setError("");
         } catch (err) {

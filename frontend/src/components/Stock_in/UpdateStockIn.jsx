@@ -15,7 +15,6 @@ const UpdateStockIn = () => {
     const [loading, setLoading] = useState(false);
     const [isAuthorized, setIsAuthorized] = useState(true);
 
-
     const { _id } = useParams();
 
     const navigate = useNavigate();
