@@ -26,6 +26,21 @@ const Report = () => {
         handleGetReportOfStockIn();
     }, []);
     
+    const handleGeTotals = async () => {
+       try {
+           const res = await axios.get('http://localhost:5000/stockOut/report/totals')
+
+           console.log(res.data.summary);
+           setTotals(res.data.summary);
+       } catch (err) {
+        console.error(err);
+       }
+    }
+
+    useEffect(() => {
+        handleGeTotals();
+    }, []);
+    
     const handleGetReportOfStockOut = async () => {
        try {
            const res = await axios.get('http://localhost:5000/stockOut/report/stockOut')
@@ -46,7 +61,22 @@ const Report = () => {
             <div className="">
                 {/* stockIn, stockOut, totalStockIn, totalStockOut, remainingStock */}
                 <h1 className="text-xl font-bold text-center text-sky-500 mb-2">Reports</h1>
+
                 <div className="max-w-7xl mx-auto w-full">
+                   <div className="flex justify-between mt-12 p-2 mb-4">
+                    <div className="bg-sky-300 p-2 rounded-lg w-fit h-fit">
+                        <h1 className="font-bold text-xl text-gray-700">Total Stock In</h1>
+                        <p className="text-center text-gray-700">{totals?.totalStockIN}</p>
+                    </div>
+                    <div className="bg-sky-300 p-2 rounded-lg w-fit h-fit">
+                        <h1 className="font-bold text-xl text-gray-700">Total Stock Out</h1>
+                        <p className="text-center text-gray-700">{totals?.totalStockOut}</p>
+                    </div>
+                    <div className="bg-sky-300 p-2 rounded-lg w-fit h-fit">
+                        <h1 className="font-bold text-xl text-gray-700">Total Remaining Stock</h1>
+                        <p className="text-center text-gray-700">{totals?.remainingStock}</p>
+                    </div>
+                </div>
                  <h1 className="text-xl font-bold    text-sky-500 mb-2">Stock In report</h1>
                   <table border={2} className="w-full">
                     <thead className="bg-sky-300 text-gray-700">
