@@ -153,7 +153,7 @@ router.get('/report/stockIn', async (req, res) => {
 });
 
 // basic Full report
-router.get('/report', async (req, res) => {
+router.get('/report/stockOut', async (req, res) => {
     try {
     
         const stockIn = await Stock_In.find().populate("Product_Id");

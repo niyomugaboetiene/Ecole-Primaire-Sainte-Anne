@@ -7,9 +7,9 @@ const Report = () => {
     const [report, setReport] = useState(null);
     
 
-    const handleGetReport = async () => {
+    const handleGetReportOfStockIn = async () => {
        try {
-           const res = await axios.get('http://localhost:5000/stockOut/report')
+           const res = await axios.get('http://localhost:5000/stockOut/report/stockIn')
 
            console.log(res.data.summary);
            setReport(res.data.summary);
@@ -19,7 +19,22 @@ const Report = () => {
     }
 
     useEffect(() => {
-        handleGetReport();
+        handleGetReportOfStockIn();
+    }, []);
+    
+    const handleGetReportOfStockOut = async () => {
+       try {
+           const res = await axios.get('http://localhost:5000/stockOut/report/stockIn')
+
+           console.log(res.data.summary);
+           setReport(res.data.summary);
+       } catch (err) {
+        console.error(err);
+       }
+    }
+
+    useEffect(() => {
+        handleGetReportOfStockOut();
     }, []);
 
     return (
@@ -61,7 +76,7 @@ const Report = () => {
                 </div>
 
                <div className="max-w-7xl mx-auto w-full mt-10">
-                 <h1 className="text-xl font-bold    text-sky-500 mb-2">Stock In report</h1>
+                 <h1 className="text-xl font-bold    text-sky-500 mb-2">Stock Out report</h1>
                   <table border={2} className="w-full">
                     <thead className="bg-sky-300 text-gray-700">
                         <tr>
