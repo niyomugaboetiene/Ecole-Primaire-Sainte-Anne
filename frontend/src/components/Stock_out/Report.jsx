@@ -28,15 +28,16 @@ const Report = () => {
                 {/* stockIn, stockOut, totalStockIn, totalStockOut, remainingStock */}
                 <h1 className="text-xl font-bold text-center text-sky-500 mb-2">Reports</h1>
                 <div className="max-w-7xl mx-auto w-full">
+                 <h1 className="text-xl font-bold    text-sky-500 mb-2">Stock In report</h1>
                   <table border={2} className="w-full">
                     <thead className="bg-sky-300 text-gray-700">
                         <tr>
                             <th className="py-2 px-3 text-left">Product Name</th>
                             <th className="py-2 px-3 text-left">Date</th>
                             <th className="py-2 px-3 text-left">Quantity</th>
-                            <th className="py-2 px-3 text-left">Stock In</th>
-                            <th className="py-2 px-3 text-left">Stock Out</th>
-                            <th className="py-2 px-3 text-left">Remainig Stock</th>
+                            <th className="py-2 px-3 text-left">Unit_price</th>
+                            <th className="py-2 px-3 text-left">Total_price</th>
+                            <th className="py-2 px-3 text-left">Action</th>
                         </tr>
                     </thead>
 
@@ -47,11 +48,10 @@ const Report = () => {
                                 <td className="py-3 px-3 text-left">{new Date(item.Date).toLocaleDateString()}</td>
                                 <td className="py-3 px-3 text-left ">{item.Quantity}</td>
                                 <td className="py-3 px-3 text-left ">{item.Unit_price}</td>
-                                <td className="py-3 px-3 text-left ">{item.Total_price}</td>
-                                <td className="py-3 px-3 text-left ">{report?.totalStockIn}</td>
+                                <td className="py-3 px-3 text-left">{item.Total_price}</td>
 
                                 <td className="flex justify-between">
-                                    <Link to={`/stockIn/update/${report?._id}`} className="inline-flex bg-green-300 gap-2 rounded-lg hover:bg-green-400  transition-colors text-white py-2 px-4 mt-2"><FaEye className="mt-1" /> View</Link>
+                                    <Link to={`/stockIn/update/${report?._id}`} className="inline-flex bg-green-300 gap-2 rounded-lg hover:bg-green-400  transition-colors text-white py-2 px-4 mt-2" title="View Details"><FaEye className="mt-1" /> View</Link>
                                 </td>
                             </tr>
                         ))}
