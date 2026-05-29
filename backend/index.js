@@ -8,6 +8,8 @@ import StockOutRouter from "./routes/StockOut.js";
 import cors from "cors";
 import connection from "./config/db.js";
 
+import AuthRoute from "./routes/Auth.js";
+
 
 connection();
 
@@ -27,6 +29,9 @@ app.use(session({
 app.use('/products', ProductRouter);
 app.use('/stockIn', StockInRouter);
 app.use('/stockOut', StockOutRouter);
+
+// ? auth
+app.use('/auth', AuthRoute);
 
 
 app.listen(5000, () => {
