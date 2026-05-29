@@ -89,4 +89,16 @@ router.post('/logout', async (req, res) => {
     }
 });
 
+router.get('/me', async (req, res) => {
+    try {
+     if (!req.session.users) {
+        return res.status(401).json({ message: 'Login first.' });
+     }
+
+     return res.status(200).json({ message: 'Your session data', me: req.session.users });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'Internal server error' });
+    }
+});
 export default router;

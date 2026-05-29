@@ -1,8 +1,10 @@
 import axios from "axios";
+import { useEffect, useState } from "react";
 import { FaHome,FaChartBar, FaBox, FaArrowDown, FaArrowUp, FaSignInAlt, FaUserPlus, FaSignOutAlt } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 
 const NavBar = () => {
+    const [users, setUSers] = useState(null);
 
     const navigate = useNavigate();
         const handleLoguout = async() => {
@@ -17,6 +19,21 @@ const NavBar = () => {
                 console.error(err);
             }
         }
+
+        const handleGetSession = async() => {
+            try {
+                const res = await axios.get('http://localhost:5000/auth/me', { withCredentials: true });
+                console.log("My sesion data", res.data.me);
+                setUSers(res.data.me);
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        useEffect(() => {
+            handleGetSession();
+        }, []);
+
     return (
         <div className="fixed top-0 left-0 right-0 ">
           <div className="bg-sky-600">
@@ -40,8 +57,14 @@ const NavBar = () => {
                       <Link className="flex gap-2 hover:text-gray-800 hover:font-bold transition duration-300 text-white font-bold" to={'/report'}><FaChartBar className="mt-1"/>Report</Link>
                 </nav>
                </div>
-               <div>
-                   Admin Data
+               <div className="border p-3 rounded-lg border-white">
+                   {users ? (
+                       <div>
+                          <p className="font-bold text-white">{users.username}</p>
+                       </div>
+                   ) : (
+                    <p className="font-bold text-red-500">Guest</p>
+                   )}
                </div>
             </div>
         </div>
