@@ -11,6 +11,7 @@ const Report = () => {
        try {
            const res = await axios.get('http://localhost:5000/stockOut/report')
 
+           console.log(res.data.summary);
            setReport(res.data.summary);
        } catch (err) {
         console.error(err);
@@ -41,9 +42,9 @@ const Report = () => {
 
                     <tbody>
                             <tr  className={'bg-sky-200 hover:bg-sky-300 transition-colors'}>
-                                <td className="py-3 px-3 text-left ">{report?.stockIn?.Product_Id?.Product_Name}</td>
-                                <td className="py-3 px-3 text-left">{new Date(report?.stockIn?.Product_Id?.createdAt).toLocaleDateString()}</td>
-                                <td className="py-3 px-3 text-left ">{report?.Quantity}</td>
+                                <td className="py-3 px-3 text-left ">{report?.stockIn[0]?.Product_Id?.Product_Name}</td>
+                                <td className="py-3 px-3 text-left">{new Date(report?.stockIn[0]?.Product_Id?.createdAt).toLocaleDateString()}</td>
+                                <td className="py-3 px-3 text-left ">{report?.stockIn[0].Quantity}</td>
                                 <td className="py-3 px-3 text-left ">{report?.totalStockIn}</td>
                                 <td className="py-3 px-3 text-left ">{report?.remainingStock}</td>
 
