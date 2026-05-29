@@ -1,7 +1,6 @@
 import express from "express";
 import Auth from "../schema/AuthSchema.js";
 import bcrypt from "bcrypt";
-import { useState } from "react";
 
 const router = express.Router();
 
@@ -66,7 +65,7 @@ router.post('/login', async (req, res) => {
         }
 
 
-        return res.status(200).json({ message: 'Logged in successfully', user: req.session.user });
+        return res.status(200).json({ message: 'Logged in successfully', user: req.session.users });
   }   catch (err) {
     console.error(err);
     return res.status(500).json({ message: 'Internal server error' });
