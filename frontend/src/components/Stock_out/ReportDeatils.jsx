@@ -3,13 +3,13 @@ import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 
 const ReportDeatils = () => {
-    const { _Product_Id } = useParams();
+    const { Product_Id } = useParams();
     const [details, setDeatils] = useState(null);
 
     const handleGeDeails = async () => {
         try {
-            const res = await axios.get(`http://localhost:5000/stockOut/report/product/${_Product_Id}`);
-            console.log(res.data.summmary);
+            const res = await axios.get(`http://localhost:5000/stockOut/report/product/${Product_Id}`);
+            console.log(res.data.summary);
 
             setDeatils(res.data.summmary);
         } catch (err) {
@@ -19,7 +19,7 @@ const ReportDeatils = () => {
 
     useEffect(() => {
         handleGeDeails();
-    }, []);
+    }, [Product_Id]);
 
     return (
         <div>
@@ -40,3 +40,5 @@ const ReportDeatils = () => {
         </div>
     )
 }
+
+export default ReportDeatils;

@@ -13,6 +13,7 @@ import StockOutList from "./components/Stock_out/StockOutList";
 import UpdateStockOut from "./components/Stock_out/UpdateStockOut";
 
 import Report from "./components/Stock_out/Report";
+import ReportDeatils from "./components/Stock_out/ReportDeatils";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
@@ -35,6 +36,7 @@ function App() {
           <Route path="/stockOut/update/:_id" element={<UpdateStockOut /> }/>
 
           <Route path="/report" element={<Report />} />
+          <Route path="/stockIn/view/:Product_Id" element={<ReportDeatils />} />
         </Routes>
      </BrowserRouter>
   )
