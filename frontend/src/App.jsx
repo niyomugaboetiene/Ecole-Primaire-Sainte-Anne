@@ -19,14 +19,17 @@ import NavBar from "./components/dashboard/NavBar";
 
 // auth
 import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
 
   return (
      <BrowserRouter>
+     <div className="pb-34">
        <NavBar />
 
+     </div>
 
         <Routes>
           <Route path="/products/AddNew" element={<AddProduct />}/>
@@ -47,6 +50,7 @@ function App() {
           <Route path="/stockIn/view/:Product_Id" element={<ReportDeatils />} />
 
           <Route path="/auth/login" element={<Login /> }/>
+          <Route path="/auth/register" element={<Register /> }/>
 
         </Routes>
      </BrowserRouter>

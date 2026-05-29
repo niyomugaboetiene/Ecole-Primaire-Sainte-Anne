@@ -7,7 +7,7 @@ const NavBar = () => {
           <div className="bg-sky-600">
                  <div className="p-1 flex justify-end gap-4">
                     <Link className="flex gap-2 justify-center items-center text-white font-bold hover:scale-105 transition duration-200" to={'/auth/login'}><FaSignInAlt /> Login</Link>
-                    <Link className="flex gap-2 justify-center items-center text-white font-bold hover:scale-105 transition duration-200"><FaUserPlus />Register</Link>
+                    <Link className="flex gap-2 justify-center items-center text-white font-bold hover:scale-105 transition duration-200" to={'/auth/register'}><FaUserPlus />Register</Link>
                  </div>
           </div>
         <div className="bg-sky-400 p-5 h-25">
