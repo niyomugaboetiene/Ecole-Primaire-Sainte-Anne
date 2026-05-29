@@ -40,19 +40,18 @@ const Report = () => {
                     </thead>
 
                     <tbody>
-                        {report?.map((prod, index) => (
-                            <tr key={index} className={index % 2 === 0 ? 'bg-sky-200 hover:bg-sky-300 transition-colors' : 'bg-gray-200 hover:bg-gray-300 transition-colors text-gray-800 font-bold'}>
-                                <td className="py-3 px-3 text-left ">{prod.stockIn?.Product_Id.Product_Name}</td>
-                                <td className="py-3 px-3 text-left">{new Date(prod.stockIn?.Product_Id.createdAt).toLocaleDateString()}</td>
-                                <td className="py-3 px-3 text-left ">{prod.Quantity}</td>
-                                <td className="py-3 px-3 text-left ">{prod.totalStockIn}</td>
-                                <td className="py-3 px-3 text-left ">{prod.remainingStock}</td>
+                            <tr  className={'bg-sky-200 hover:bg-sky-300 transition-colors'}>
+                                <td className="py-3 px-3 text-left ">{report?.stockIn?.Product_Id?.Product_Name}</td>
+                                <td className="py-3 px-3 text-left">{new Date(report?.stockIn?.Product_Id?.createdAt).toLocaleDateString()}</td>
+                                <td className="py-3 px-3 text-left ">{report?.Quantity}</td>
+                                <td className="py-3 px-3 text-left ">{report?.totalStockIn}</td>
+                                <td className="py-3 px-3 text-left ">{report?.remainingStock}</td>
 
                                 <td className="flex justify-between">
-                                    <Link to={`/stockIn/update/${prod._id}`} className="inline-flex bg-green-300 rounded-lg hover:bg-green-400  transition-colors text-white py-2 px-4 mt-2"><FaEye /> View</Link>
+                                    <Link to={`/stockIn/update/${report?._id}`} className="inline-flex bg-green-300 gap-2 rounded-lg hover:bg-green-400  transition-colors text-white py-2 px-4 mt-2"><FaEye className="mt-1" /> View</Link>
                                 </td>
                             </tr>
-                        ))}
+                        
                     </tbody>
                 </table>
                 </div>
