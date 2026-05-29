@@ -162,9 +162,7 @@ router.get('/report/stockOut', async (req, res) => {
         //     return total + item.Quantity;
         // }, 0);
 
-
-
-        return res.status(200).json({ message: 'Stock generated successfully', summary: { stockOut  }});
+        return res.status(200).json({ message: 'Stock generated successfully', summary:  stockOut });
 
     } catch (err) {
         console.error(err);
@@ -173,7 +171,6 @@ router.get('/report/stockOut', async (req, res) => {
 });
 
 // get report per product
-
 router.get('/report/product/:Product_Id', async (req, res) => {
     try {
         const { Product_Id } = req.params;
