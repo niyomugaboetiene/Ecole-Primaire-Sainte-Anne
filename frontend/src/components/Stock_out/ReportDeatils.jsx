@@ -28,7 +28,9 @@ const ReportDeatils = () => {
                 <div>
                      {details?.map((item, index) => (
                         <div key={index}>
-
+                            <h1>{item?.stockIn[0].Product_Name}</h1>
+                            <p>{item?.stockIn[0]._Product_Id}</p>
+                            
                         </div>
                      ))}
                 </div>
