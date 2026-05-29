@@ -35,3 +35,43 @@ router.post('/sign-in', async (req, res) => {
     }
 });
 
+router.post('/login', async (req, res) => {
+  try {
+         const { UserName, Password } = req.body;
+
+        if (!UserName || !Password) {
+            return res.status(400).json({ message: 'Fill out missing fields' });
+        }
+
+        const isUserNameExist = await Auth.findOne({ UserName });
+
+        if (!isUserNameExist) {
+            return res.status(403).json({
+                message: 'Invalid User name'
+            });
+        }
+
+
+        const hashedPassword = isUserNameExist.Password;
+
+        const isPasswordCorrect = await bcrypt.compare(Password, hashedPassword);
+
+        if (!isPasswordCorrect) {
+            return res.status(401).json({ message: 'Password incorrect'});
+        }
+
+        req.session.users = {
+            _id: isUserNameExist._id,
+            username: isUserNameExist.UserName
+        }
+
+
+        return res.status(200).json({ message: 'Logged in successfully', user: req.session.user });
+  }   catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+
+export default router;
