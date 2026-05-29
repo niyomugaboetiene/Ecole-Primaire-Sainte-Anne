@@ -170,6 +170,34 @@ router.get('/report/stockOut', async (req, res) => {
     }
 });
 
+router.get('/report/totals', async (req, res) => {
+    try {
+
+        const stockIn = await Stock_In.find().populate("Product_Id");
+        const stockOut = await Stock_Out.find().populate("Product_Id");
+
+        const totalStockOut = stockOut.reduce((total, item) => {
+            return total + item.Quantity;
+        }, 0);
+        
+        const totalStockIN = stockIn.reduce((total, item) => {
+            return total + item.Quantity;
+        }, 0);
+
+        const remainingStock = totalStockIN - totalStockOut;
+
+        return res.status(200).json({ message: 'Report generated successfully', 
+            summary: {
+                totalStockIN, 
+                totalStockOut,
+                remainingStock
+            }
+        });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'Internal server error'})
+    }
+})
 // get report per product
 router.get('/report/product/:Product_Id', async (req, res) => {
     try {
