@@ -5,6 +5,8 @@ import {  FaEye } from "react-icons/fa";
 
 const Report = () => {
     const [report, setReport] = useState(null);
+
+    const [stockOut, setStockOut] = useState(null);
     
 
     const handleGetReportOfStockIn = async () => {
@@ -24,10 +26,10 @@ const Report = () => {
     
     const handleGetReportOfStockOut = async () => {
        try {
-           const res = await axios.get('http://localhost:5000/stockOut/report/stockIn')
+           const res = await axios.get('http://localhost:5000/stockOut/report/stockOut')
 
            console.log(res.data.summary);
-           setReport(res.data.summary);
+           setStockOut(res.data.summary);
        } catch (err) {
         console.error(err);
        }

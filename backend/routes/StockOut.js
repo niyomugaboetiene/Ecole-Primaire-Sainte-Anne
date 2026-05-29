@@ -156,21 +156,15 @@ router.get('/report/stockIn', async (req, res) => {
 router.get('/report/stockOut', async (req, res) => {
     try {
     
-        const stockIn = await Stock_In.find().populate("Product_Id");
         const stockOut = await Stock_Out.find().populate("Product_Id");
 
-        const totalStockOut = stockOut.reduce((total, item) => {
-            return total + item.Quantity;
-        }, 0);
-
-        const totalStockIn = stockIn.reduce((total, item) => {
-            return total + item.Quantity;
-        }, 0);
-
-        const remainingStock = totalStockIn - totalStockOut;
+        // const totalStockOut = stockOut.reduce((total, item) => {
+        //     return total + item.Quantity;
+        // }, 0);
 
 
-        return res.status(200).json({ message: 'Stock generated successfully', summary: { stockIn, stockOut, totalStockIn, totalStockOut, remainingStock }});
+
+        return res.status(200).json({ message: 'Stock generated successfully', summary: { stockOut  }});
 
     } catch (err) {
         console.error(err);
