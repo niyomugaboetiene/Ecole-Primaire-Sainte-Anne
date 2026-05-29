@@ -30,7 +30,7 @@ const ReportDeatils = () => {
                    <h1 className="text-sky-700 text-xl font-bold mb-3">Product Deatils</h1>
                    <h1 className="text-md text-sky-700 font-bold">{details?.stockIn[0].Product_Id?.Product_Name}</h1>
                 </div>
-                <div>
+                <div className="bg-linear-to-b from-sky-200 to-sky-300 w-full h-full p-3 rounded-lg">
                    <p>Product Id{details?.stockIn[0].Product_Id?.Product_Id}</p>
                    <p>Stock In{details?.totalStockIN}</p>
                    <p>Stock Out{details?.totalStockOut}</p>
