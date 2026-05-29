@@ -6,14 +6,16 @@ import {  FaEye } from "react-icons/fa";
 const Report = () => {
     const [report, setReport] = useState(null);
 
-    const [stockOut, setStockOut] = useState(null);
+    const [stockOuts, setStockOut] = useState(null);
+
+    const [totals, setTotals] = useState(null);
     
 
     const handleGetReportOfStockIn = async () => {
        try {
            const res = await axios.get('http://localhost:5000/stockOut/report/stockIn')
 
-           console.log(res.data.summary);
+        //    console.log(res.data.summary);
            setReport(res.data.summary);
        } catch (err) {
         console.error(err);
@@ -28,7 +30,7 @@ const Report = () => {
        try {
            const res = await axios.get('http://localhost:5000/stockOut/report/stockOut')
 
-           console.log(res.data.summary);
+           console.log("Stock out", res.data.summary);
            setStockOut(res.data.summary);
        } catch (err) {
         console.error(err);
@@ -90,7 +92,7 @@ const Report = () => {
                     </thead>
 
                     <tbody>
-                        {report?.stockOut?.map((item, index) => (
+                        {stockOuts?.map((item, index) => (
                             <tr  className={'bg-sky-200 hover:bg-sky-300 transition-colors'} key={index}>
                                 <td className="py-3 px-3 text-left ">{item.Product_Id.Product_Name}</td>
                                 <td className="py-3 px-3 text-left">{new Date(item.Date).toLocaleDateString()}</td>
