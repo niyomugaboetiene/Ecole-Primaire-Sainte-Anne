@@ -3,7 +3,14 @@ import express from "express"
 
 const router = express.Router();
 
-router.post('/AddNew', async (req, res) => {
+function isAuthorized(req, res, next) {
+    if (!req.session.users) {
+        return res.status(401).json({ message: 'Login first.' });
+    }
+
+    next();
+}
+router.post('/AddNew', isAuthorized, async (req, res) => {
     try {
     const  {Product_Name, Product_Id}  = req.body;
 
@@ -20,7 +27,7 @@ router.post('/AddNew', async (req, res) => {
 }
 });
 
-router.get('/list', async (req, res) => {
+router.get('/list', isAuthorized, async (req, res) => {
     try {
         const List = await Product.find();
 
@@ -35,7 +42,7 @@ router.get('/list', async (req, res) => {
     }
 });
 
-router.get('/single/:_id', async (req, res) => {
+router.get('/single/:_id', isAuthorized, async (req, res) => {
     try {
         const { _id } = req.params;
 
@@ -56,7 +63,7 @@ router.get('/single/:_id', async (req, res) => {
 });
 
 
-router.put('/update/:_id', async (req, res) => {
+router.put('/update/:_id', isAuthorized, async (req, res) => {
     try {
         const _id = req.params._id;
 
@@ -75,7 +82,7 @@ router.put('/update/:_id', async (req, res) => {
     }
 });
 
-router.delete('/delete/:_id', async (req, res) => {
+router.delete('/delete/:_id', isAuthorized, async (req, res) => {
     try {
         const _id = req.params._id;
 

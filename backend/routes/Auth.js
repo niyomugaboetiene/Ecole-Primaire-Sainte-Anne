@@ -61,7 +61,8 @@ router.post('/login', async (req, res) => {
 
         req.session.users = {
             _id: isUserNameExist._id,
-            username: isUserNameExist.UserName
+            username: isUserNameExist.UserName,
+            joinedAt: isUserNameExist.createdAt
         }
 
 

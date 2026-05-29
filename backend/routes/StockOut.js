@@ -4,7 +4,14 @@ import express from "express"
 
 const router = express.Router();
 
-router.post('/AddNew', async (req, res) => {
+function isAuthorized(req, res, next) {
+    if (!req.session.users) {
+        return res.status(401).json({ message: 'Login first.' });
+    }
+
+    next();
+}
+router.post('/AddNew', isAuthorized, async (req, res) => {
     try {
     const  { Product_Id, Date, Quantity }  = req.body;
 
@@ -38,7 +45,7 @@ router.post('/AddNew', async (req, res) => {
 }
 });
 
-router.get('/list', async (req, res) => {
+router.get('/list', isAuthorized, async (req, res) => {
     try {
         const List = await Stock_Out.find().populate("Product_Id");
 
@@ -53,7 +60,7 @@ router.get('/list', async (req, res) => {
     }
 });
 
-router.get('/single/:_id', async (req, res) => {
+router.get('/single/:_id', isAuthorized, async (req, res) => {
     try {
         const { _id } = req.params;
 
@@ -74,7 +81,7 @@ router.get('/single/:_id', async (req, res) => {
 });
 
 
-router.put('/update/:_id', async (req, res) => {
+router.put('/update/:_id', isAuthorized, async (req, res) => {
   try {
        
        const _id = req.params._id;
@@ -116,7 +123,7 @@ router.put('/update/:_id', async (req, res) => {
     }
 });
 
-router.delete('/delete/:_id', async (req, res) => {
+router.delete('/delete/:_id', isAuthorized, async (req, res) => {
     try {
         const _id = req.params._id;
 
@@ -135,7 +142,7 @@ router.delete('/delete/:_id', async (req, res) => {
 
 
 // basic Full report for stock in
-router.get('/report/stockIn', async (req, res) => {
+router.get('/report/stockIn', isAuthorized, async (req, res) => {
     try {
     
         const stockIn = await Stock_In.find().populate("Product_Id");
@@ -153,7 +160,7 @@ router.get('/report/stockIn', async (req, res) => {
 });
 
 // basic Full report
-router.get('/report/stockOut', async (req, res) => {
+router.get('/report/stockOut', isAuthorized, async (req, res) => {
     try {
     
         const stockOut = await Stock_Out.find().populate("Product_Id");
@@ -170,7 +177,7 @@ router.get('/report/stockOut', async (req, res) => {
     }
 });
 
-router.get('/report/totals', async (req, res) => {
+router.get('/report/totals', isAuthorized, async (req, res) => {
     try {
 
         const stockIn = await Stock_In.find().populate("Product_Id");
@@ -199,7 +206,7 @@ router.get('/report/totals', async (req, res) => {
     }
 })
 // get report per product
-router.get('/report/product/:Product_Id', async (req, res) => {
+router.get('/report/product/:Product_Id', isAuthorized, async (req, res) => {
     try {
         const { Product_Id } = req.params;
 
