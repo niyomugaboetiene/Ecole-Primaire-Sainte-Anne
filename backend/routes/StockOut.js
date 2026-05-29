@@ -134,6 +134,24 @@ router.delete('/delete/:_id', async (req, res) => {
 
 
 
+// basic Full report for stock in
+router.get('/report/stockIn', async (req, res) => {
+    try {
+    
+        const stockIn = await Stock_In.find().populate("Product_Id");
+
+        const totalStockIn = stockIn.reduce((total, item) => {
+            return total + item.Quantity;
+        }, 0);
+
+        return res.status(200).json({ message: 'Stock generated successfully', summary: { stockIn, totalStockIn }});
+
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'Internal server error '})
+    }
+});
+
 // basic Full report
 router.get('/report', async (req, res) => {
     try {

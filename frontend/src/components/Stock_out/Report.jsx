@@ -41,17 +41,20 @@ const Report = () => {
                     </thead>
 
                     <tbody>
-                            <tr  className={'bg-sky-200 hover:bg-sky-300 transition-colors'}>
-                                <td className="py-3 px-3 text-left ">{report?.stockIn[0]?.Product_Id?.Product_Name}</td>
-                                <td className="py-3 px-3 text-left">{new Date(report?.stockIn[0]?.Product_Id?.createdAt).toLocaleDateString()}</td>
-                                <td className="py-3 px-3 text-left ">{report?.stockIn[0].Quantity}</td>
+                        {report?.stockIn?.map((item, index) => (
+                            <tr  className={'bg-sky-200 hover:bg-sky-300 transition-colors'} key={index}>
+                                <td className="py-3 px-3 text-left ">{item.Product_Id.Product_Name}</td>
+                                <td className="py-3 px-3 text-left">{new Date(item.Date).toLocaleDateString()}</td>
+                                <td className="py-3 px-3 text-left ">{item.Quantity}</td>
+                                <td className="py-3 px-3 text-left ">{item.Unit_price}</td>
+                                <td className="py-3 px-3 text-left ">{item.Total_price}</td>
                                 <td className="py-3 px-3 text-left ">{report?.totalStockIn}</td>
-                                <td className="py-3 px-3 text-left ">{report?.remainingStock}</td>
 
                                 <td className="flex justify-between">
                                     <Link to={`/stockIn/update/${report?._id}`} className="inline-flex bg-green-300 gap-2 rounded-lg hover:bg-green-400  transition-colors text-white py-2 px-4 mt-2"><FaEye className="mt-1" /> View</Link>
                                 </td>
                             </tr>
+                        ))}
                         
                     </tbody>
                 </table>
