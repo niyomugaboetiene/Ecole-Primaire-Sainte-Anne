@@ -51,7 +51,7 @@ const Report = () => {
                                 <td className="py-3 px-3 text-left">{item.Total_price}</td>
 
                                 <td className="flex justify-between">
-                                    <Link to={`/stockIn/update/${report?._id}`} className="inline-flex bg-green-300 gap-2 rounded-lg hover:bg-green-400  transition-colors text-white py-2 px-4 mt-2" title="View Details"><FaEye className="mt-1" /> View</Link>
+                                    <Link to={`/stockIn/view/${item?.Product_Id._id}`} className="inline-flex bg-green-300 gap-2 rounded-lg hover:bg-green-400  transition-colors text-white py-2 px-4 mt-2" title="View Details"><FaEye className="mt-1" /> View</Link>
                                 </td>
                             </tr>
                         ))}
