@@ -30,7 +30,9 @@ const ReportDeatils = () => {
                         <div key={index}>
                             <h1>{item?.stockIn[0].Product_Name}</h1>
                             <p>{item?.stockIn[0]._Product_Id}</p>
-                            
+                            <p>{item.totalStockIN}</p>
+                            <p>{item.totalStockOut}</p>
+                            <p>{item.remainingStock}</p>
                         </div>
                      ))}
                 </div>
