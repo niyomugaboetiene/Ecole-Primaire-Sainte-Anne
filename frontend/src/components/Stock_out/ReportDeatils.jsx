@@ -6,6 +6,7 @@ import { FaArrowLeft, FaPlus} from "react-icons/fa"
 const ReportDeatils = () => {
     const { Product_Id } = useParams();
     const [details, setDeatils] = useState(null);
+    const navigate = useNavigate();
 
     const handleGeDeails = async () => {
         try {
@@ -42,7 +43,7 @@ const ReportDeatils = () => {
                    <p className="bg-sky-300 p-2 py-3 rounded-full">{details?.remainingStock}</p>
 
                    <div className="flex justify-between mt-5 ">
-                    <button className="w-55 bg-linear-to-br text-white font-bold rounded-lg  py-2 from-red-600 hover:scale-105 transition duration-300 to-red-400 flex items-center justify-center gap-2"><FaArrowLeft />Back</button>
+                    <button className="w-55 bg-linear-to-br text-white font-bold rounded-lg  py-2 from-red-600 hover:scale-105 transition duration-300 to-red-400 flex items-center justify-center gap-2" onClick={() => navigate(-1)}><FaArrowLeft />Back</button>
                     <button  className="w-55 bg-linear-to-br text-white font-bold rounded-lg  py-2 from-green-600 hover:scale-105 transition duration-300 to-green-400 flex items-center justify-center gap-2 h-12"><FaPlus />Find New</button>
                    </div>
                  </div>
