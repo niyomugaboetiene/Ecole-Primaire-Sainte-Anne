@@ -20,6 +20,7 @@ import NavBar from "./components/dashboard/NavBar";
 // auth
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
+import Footer from "./components/dashboard/Footer";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
@@ -51,6 +52,9 @@ function App() {
 
           <Route path="/auth/login" element={<Login /> }/>
           <Route path="/auth/register" element={<Register /> }/>
+          <Route path="/footer" element={<Footer /> }/>
+
+
 
         </Routes>
      </BrowserRouter>

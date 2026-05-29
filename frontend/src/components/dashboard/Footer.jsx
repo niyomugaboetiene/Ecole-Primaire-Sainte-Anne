@@ -1,13 +1,15 @@
 import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa"
+import { FaHome,FaChartBar, FaBox, FaArrowDown, FaArrowUp, FaSignInAlt, FaUserPlus } from "react-icons/fa";
 
+import { Link } from "react-router-dom";
 const Footer = () => {
     return (
-        <div>
+        <div className="bg-stone-900">
             <div>
                <div className="bg-linear-to-l from-white to-sky-800 bg-clip-text text-transparent">
-                    <p className="mt-3 text-clip text-transparent font-bold  text-3xl  hover:scale-105 transition duration-200">Saint Anne</p>
+                    <p className="mt-3 text-clip text-transparent font-bold  text-3xl  transition duration-200">Saint Anne</p>
                 </div>
-                               <div >
+                 <div >
                    <nav className="flex space-x-4 mt-4">
                       <Link className="flex gap-2 hover:text-gray-800 hover:font-bold transition duration-300 text-white font-bold"><FaHome className="mt-1"/>Home</Link>
                       <Link className="flex gap-2 hover:text-gray-800 hover:font-bold transition duration-300 text-white font-bold" to={'/products/list'}><FaBox className="mt-1" />Products</Link>
