@@ -12,7 +12,7 @@ const StockInList = () => {
 
     const handleGetStock = async () => {
        try {
-           const res = await axios.get('http://localhost:5000/stockIn/list')
+           const res = await axios.get('http://localhost:5000/stockIn/list', { withCredentials: true })
 
            setStockIn(res.data.list);
            console.log("P name", res.data.list);
@@ -33,7 +33,7 @@ const StockInList = () => {
         try {
             const confirm = window.confirm("Are you sure ?");
             if (confirm){
-                await axios.delete(`http://localhost:5000/stockIn/delete/${_id}`);
+                await axios.delete(`http://localhost:5000/stockIn/delete/${_id}`, { withCredentials: true });
                 await handleGetStock();
             }
         } catch (err) {

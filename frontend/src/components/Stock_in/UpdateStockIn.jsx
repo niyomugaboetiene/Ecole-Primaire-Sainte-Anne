@@ -23,7 +23,7 @@ const UpdateStockIn = () => {
 
     const handleGetStock = async () => {
        try {
-           const res = await axios.get(`http://localhost:5000/stockIn/single/${_id}`)
+           const res = await axios.get(`http://localhost:5000/stockIn/single/${_id}`, { withCredentials: true })
 
            const stocksIn =  res.data.list;
            console.log("Stock in", stocksIn);
@@ -46,7 +46,7 @@ const UpdateStockIn = () => {
 
     const handleGetProducts = async () => {
        try {
-           const res = await axios.get('http://localhost:5000/products/list')
+           const res = await axios.get('http://localhost:5000/products/list', { withCredentials: true })
 
            setProducts(res.data.list);
        } catch (err) {
@@ -65,7 +65,7 @@ const UpdateStockIn = () => {
     const handleUpdateStock = async () => {
         try {
             setLoading(true);
-            const res = await axios.put(`http://localhost:5000/stockIn/update/${_id}`, { Product_Id, Date, Quantity, Unit_price });
+            const res = await axios.put(`http://localhost:5000/stockIn/update/${_id}`, { Product_Id, Date, Quantity, Unit_price }, { withCredentials: true });
             setMessage(res.data.message);
             setLoading(false);
             setTimeout(() => {

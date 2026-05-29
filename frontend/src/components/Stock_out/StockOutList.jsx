@@ -13,7 +13,7 @@ const StockOutList = () => {
 
     const handleGetStock = async () => {
        try {
-           const res = await axios.get('http://localhost:5000/stockOut/list')
+           const res = await axios.get('http://localhost:5000/stockOut/list', { withCredentials: true })
 
            setStockOut(res.data.list);
        } catch (err) {
@@ -33,7 +33,7 @@ const StockOutList = () => {
         try {
             const confirm = window.confirm("Are you sure ?");
             if (confirm){
-                await axios.delete(`http://localhost:5000/stockOut/delete/${_id}`);
+                await axios.delete(`http://localhost:5000/stockOut/delete/${_id}`, { withCredentials: true });
                 await handleGetStock();
             }
         } catch (err) {

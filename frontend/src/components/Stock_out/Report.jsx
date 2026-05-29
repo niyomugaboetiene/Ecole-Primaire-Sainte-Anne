@@ -17,7 +17,7 @@ const Report = () => {
 
     const handleGetReportOfStockIn = async () => {
        try {
-           const res = await axios.get('http://localhost:5000/stockOut/report/stockIn')
+           const res = await axios.get('http://localhost:5000/stockOut/report/stockIn', { withCredentials: true })
 
         //    console.log(res.data.summary);
            setReport(res.data.summary);
@@ -36,7 +36,7 @@ const Report = () => {
     
     const handleGeTotals = async () => {
        try {
-           const res = await axios.get('http://localhost:5000/stockOut/report/totals')
+           const res = await axios.get('http://localhost:5000/stockOut/report/totals', { withCredentials: true })
 
            console.log(res.data.summary);
            setTotals(res.data.summary);
@@ -55,7 +55,7 @@ const Report = () => {
     
     const handleGetReportOfStockOut = async () => {
        try {
-           const res = await axios.get('http://localhost:5000/stockOut/report/stockOut')
+           const res = await axios.get('http://localhost:5000/stockOut/report/stockOut', { withCredentials: true })
 
            console.log("Stock out", res.data.summary);
            setStockOut(res.data.summary);

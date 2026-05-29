@@ -19,7 +19,7 @@ const UpdateProduct = () => {
 
     const handleGetExistingProduct = async () => {
         try {
-            const res = await axios.get(`http://localhost:5000/products/single/${_id}`);
+            const res = await axios.get(`http://localhost:5000/products/single/${_id}`, { withCredentials: true });
             const product = res.data.list;
 
             setProduct_Id(product.Product_Id);
@@ -40,7 +40,7 @@ const UpdateProduct = () => {
     const handleUpdateProduct = async () => {
         try {
             setIsLoading(true);
-            const res = await axios.put(`http://localhost:5000/products/update/${_id}`, { Product_Id, Product_Name });
+            const res = await axios.put(`http://localhost:5000/products/update/${_id}`, { Product_Id, Product_Name }, { withCredentials: true });
             setMessage(res.data.message);
             setError("");
             setTimeout(() => {

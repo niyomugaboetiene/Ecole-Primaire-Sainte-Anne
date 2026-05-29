@@ -13,7 +13,7 @@ const ProductList = () => {
 
     const handleGetProducts = async () => {
        try {
-           const res = await axios.get('http://localhost:5000/products/list')
+           const res = await axios.get('http://localhost:5000/products/list', { withCredentials: true })
 
            setProducts(res.data.list);
        } catch (err) {
@@ -33,7 +33,7 @@ const ProductList = () => {
         try {
             const confirm = window.confirm("Are you sure ?");
             if (confirm){
-                await axios.delete(`http://localhost:5000/products/delete/${_id}`);
+                await axios.delete(`http://localhost:5000/products/delete/${_id}`, { withCredentials: true });
                 await handleGetProducts();
             }
         } catch (err) {
