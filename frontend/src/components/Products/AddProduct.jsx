@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
-import { FaPlus, FaProductHunt} from "react-icons/fa";
-import { SiIfood} from "react-icons/si";
+import { FaPlus} from "react-icons/fa";
+import { FaSignInAlt } from "react-icons/fa";
 
 const AddProduct = () => {
     const [Product_Id, setProduct_Id] = useState(0);
@@ -9,6 +9,7 @@ const AddProduct = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [message, setMessage] = useState("");
     const [error, setError] = useState("");
+    const [isAuthorized, setIsAuthorized] = useState(true);
 
 
     const handleAddProduct = async () => {
@@ -24,10 +25,25 @@ const AddProduct = () => {
         } catch (err) {
             const errorMessage = err.response?.data?.message || "Error occured";
             console.error(err);
+            if (errorMessage === "Login first.") {
+               setIsAuthorized(false);
+           }
             setError(errorMessage);
             setMessage("");
         }
     }
+
+        if (!isAuthorized) {
+            return (
+                <div className="flex justify-center items-center min-h-screen">
+                    <div className="bg-yellow-200 p-3 h-fit rounded-lg">
+                       <h1 className="text-center text-2xl font-bold text-yellow-700 mb-4">Security Alert</h1>
+                       <p className="text-yellow-900">You are not authorized. do to this you can login first of all.</p>
+                       <button className="bg-sky-400 flex justify-center items-center gap-2 w-1/2 mt-3 py-3 rounded-full ms-25 text-white font-bold hover:bg-sky-600" onClick={() =>navigate('/auth/login')}><FaSignInAlt /> Login</button>
+                    </div>
+                </div>
+            )
+        }
 
     return (
         <div className="bg-sky-200 min-h-screen flex justify-center items-center">
