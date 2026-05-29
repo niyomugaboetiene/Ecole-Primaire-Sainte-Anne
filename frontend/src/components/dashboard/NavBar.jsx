@@ -1,13 +1,29 @@
-import { FaHome,FaChartBar, FaBox, FaArrowDown, FaArrowUp, FaSignInAlt, FaUserPlus } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { FaHome,FaChartBar, FaBox, FaArrowDown, FaArrowUp, FaSignInAlt, FaUserPlus, FaSignOutAlt } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
 
 const NavBar = () => {
+
+    const navigate = useNavigate();
+        const handleLoguout = async() => {
+            try {
+                await axios.post('http://localhost:5000/auth/logout', {}, { withCredentials: true });
+                alert("Logged out successfully");
+
+                setTimeout(() => {
+                   navigate('/auth/login');                    
+                }, 2000);
+            } catch (err) {
+                console.error(err);
+            }
+        }
     return (
         <div className="fixed top-0 left-0 right-0 ">
           <div className="bg-sky-600">
                  <div className="p-1 flex justify-end gap-4">
                     <Link className="flex gap-2 justify-center items-center text-white font-bold hover:scale-105 transition duration-200" to={'/auth/login'}><FaSignInAlt /> Login</Link>
                     <Link className="flex gap-2 justify-center items-center text-white font-bold hover:scale-105 transition duration-200" to={'/auth/register'}><FaUserPlus />Register</Link>
+                    <button className="flex gap-2 justify-center items-center text-white font-bold hover:scale-105 transition duration-200" onClick={handleLoguout}><FaSignOutAlt />Logout</button>
                  </div>
           </div>
         <div className="bg-sky-400 p-5 h-25">
