@@ -9,9 +9,11 @@ const ReportDeatils = () => {
     const handleGeDeails = async () => {
         try {
             const res = await axios.get(`http://localhost:5000/stockOut/report/product/${Product_Id}`);
-            console.log(res.data.summary);
+            
+            // console.log("Received Id", Product_Id);
+            console.log("Result", res.data.summary);
 
-            setDeatils(res.data.summmary);
+            setDeatils(res.data.summary);
         } catch (err) {
             console.error(err);
         }
@@ -26,16 +28,12 @@ const ReportDeatils = () => {
             <div>
                 <h1>Product Deatils</h1>
                 <div>
-                     {details?.map((item, index) => (
-                        <div key={index}>
-                            <h1>{item?.stockIn[0].Product_Name}</h1>
-                            <p>{item?.stockIn[0]._Product_Id}</p>
-                            <p>{item.totalStockIN}</p>
-                            <p>{item.totalStockOut}</p>
-                            <p>{item.remainingStock}</p>
+                            <h1>{details?.stockIn[0].Product_Name}</h1>
+                            <p>{details?.stockIn[0]._Product_Id}</p>
+                            <p>{details?.totalStockIN}</p>
+                            <p>{details?.totalStockOut}</p>
+                            <p>{details?.remainingStock}</p>
                         </div>
-                     ))}
-                </div>
             </div>
         </div>
     )
