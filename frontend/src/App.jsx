@@ -52,11 +52,8 @@ function App() {
 
           <Route path="/auth/login" element={<Login /> }/>
           <Route path="/auth/register" element={<Register /> }/>
-          <Route path="/footer" element={<Footer /> }/>
-
-
-
         </Routes>
+        <Footer />
      </BrowserRouter>
   )
 }
