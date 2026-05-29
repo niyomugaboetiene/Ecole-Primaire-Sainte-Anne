@@ -1,4 +1,5 @@
 import express from "express";
+import session from "express-session";
 
 import ProductRouter from "./routes/Products.js";
 import StockInRouter from "./routes/StockIn.js";
@@ -14,6 +15,12 @@ const app = express();
 app.use(express.json());
 app.use(cors({
     origin: 'http://localhost:5173'
+}));
+app.use(session({
+    secret: 'my-scret-key',
+    resave: false,
+    saveUninitialized: true, 
+    cookie: { httpOnly: true }
 }));
 
 // * route endpoint
