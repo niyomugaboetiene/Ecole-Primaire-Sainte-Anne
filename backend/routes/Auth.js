@@ -72,5 +72,20 @@ router.post('/login', async (req, res) => {
   }
 });
 
+router.post('/logout', async (req, res) => {
+    try {
+        req.session.destroy((err) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({ message: 'Field to login' });
+            }
+
+            return res.status(200).json({ message: 'Logged in successfully' });
+        });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'Intenal server error' });
+    }
+});
 
 export default router;
