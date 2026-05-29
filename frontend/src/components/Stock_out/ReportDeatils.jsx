@@ -28,12 +28,12 @@ const ReportDeatils = () => {
             <div>
                 <h1>Product Deatils</h1>
                 <div>
-                            <h1>{details?.stockIn[0].Product_Name}</h1>
-                            <p>{details?.stockIn[0]._Product_Id}</p>
-                            <p>{details?.totalStockIN}</p>
-                            <p>{details?.totalStockOut}</p>
-                            <p>{details?.remainingStock}</p>
-                        </div>
+                   <h1>{details?.stockIn[0].Product_Id?.Product_Name}</h1>
+                   <p>Product Id{details?.stockIn[0].Product_Id?.Product_Id}</p>
+                   <p>Stock In{details?.totalStockIN}</p>
+                   <p>Stock Out{details?.totalStockOut}</p>
+                  <p>Remaining Stock{details?.remainingStock}</p>
+                 </div>
             </div>
         </div>
     )
