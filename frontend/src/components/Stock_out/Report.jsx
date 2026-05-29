@@ -77,6 +77,7 @@ const Report = () => {
                         <p className="text-center text-gray-700">{totals?.remainingStock}</p>
                     </div>
                 </div>
+                
                  <h1 className="text-xl font-bold    text-sky-500 mb-2">Stock In report</h1>
                   <table border={2} className="w-full">
                     <thead className="bg-sky-300 text-gray-700">
